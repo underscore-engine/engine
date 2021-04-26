@@ -2,7 +2,7 @@
 Main repository containing code for the engine.
 
 # About
-Underscore Engine is a new, easy to use and open source game engine written in C#. The engine comes with component handling, rendering, IO handling, its own physics and much more.
+Underscore Engine is a new, easy to use and open source game engine written in C++. The engine comes with component handling, rendering, IO handling, its own physics and much more.
 
 # Developers
 This engine is developed and maintained by underscore.
