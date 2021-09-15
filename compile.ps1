@@ -1,6 +1,11 @@
 cls
 Write-Host ">>> Compiling program..." -ForegroundColor magenta
-cd bin
+if ($args[0] -eq "--force") {
+  Remove-Item .\bin\* -Recurse
+} elseif (!(Test-Path -path .\bin\)) {
+  New-Item -ItemType directory -Path .\bin\
+}
+cd .\bin\
 cmake ..
 cmake --build .
 Write-Output ""
