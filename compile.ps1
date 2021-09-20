@@ -7,8 +7,23 @@ if ($args[0] -eq "--force") {
 }
 cd .\bin\
 cmake ..
+if (!$?) {
+  Write-Host ">>> Error: Could not compile to binaries" -ForegroundColor red
+  cd ..
+  exit 1
+}
 cmake --build .
+if (!$?) {
+  Write-Host ">>> Error: Could not build executable" -ForegroundColor red
+  cd ..
+  exit 1
+}
 Write-Output ""
 Write-Host ">>> Running program..." -ForegroundColor magenta
 .\Debug\program.exe
+if (!$?) {
+  Write-Host ">>> Error: Could run executable" -ForegroundColor red
+  cd ..
+  exit 1
+}
 cd ..
