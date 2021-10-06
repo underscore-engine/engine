@@ -1,6 +1,13 @@
+# Build system
 bin
-*.exe
-.env
-.vscode
+build
+gmon.out
+*.stats
+Thumbs.db
+.DS_Store
+
+# VS Code
+.vscode/ipch
+
+# Project specific
 temp
-CMakeFiles
