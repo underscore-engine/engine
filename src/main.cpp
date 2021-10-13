@@ -1,4 +1,5 @@
 #include "Platform/Platform.hpp"
+#include "Player.cpp"
 
 int main()
 {
@@ -17,14 +18,7 @@ int main()
 
 	sf::Event event;
 
-	sf::Texture texture;
-	if (!texture.loadFromFile("main_character.png"))
-	{
-		// error...
-	}
-	sf::Sprite sprite;
-	sprite.setTexture(texture);
-	sprite.setPosition(sf::Vector2f(10.f, 50.f)); // absolute position
+	Player player;
 
 	while (window.isOpen())
 	{
@@ -37,25 +31,25 @@ int main()
 			{
 				if (event.key.code == sf::Keyboard::D)
 				{
-					sprite.move(sf::Vector2f(10.f, 0.f));
+					player.move_right();
 				}
 				if (event.key.code == sf::Keyboard::A)
 				{
-					sprite.move(sf::Vector2f(-10.f, 0.f));
+					player.move_left();
 				}
 				if (event.key.code == sf::Keyboard::S)
 				{
-					sprite.move(sf::Vector2f(0.f, 10.f));
+					player.move_down();
 				}
 				if (event.key.code == sf::Keyboard::W)
 				{
-					sprite.move(sf::Vector2f(0.f, -10.f));
+					player.move_up();
 				}
 			}
 		}
 
 		window.clear();
-		window.draw(sprite);
+		window.draw(player.sprite);
 		window.display();
 	}
 
