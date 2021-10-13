@@ -1,5 +1,3 @@
-//#include "Player.h"
-
 class Player
 {
 public:
@@ -8,10 +6,8 @@ public:
 
 	Player()
 	{
-
 		if (!texture.loadFromFile("main_character.png"))
-		{
-		}
+		{}
 
 		sprite.setTexture(texture);
 		sprite.setPosition(sf::Vector2f(20.f, 50.f));
