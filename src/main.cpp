@@ -2,12 +2,11 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(2000, 1500), "My window");
+	sf::RenderWindow window(sf::VideoMode(2000, 1500), "Game");
 
 	Player player;
 
 	sf::Event event;
-
 	while (window.isOpen())
 	{
 		while (window.pollEvent(event))
@@ -32,7 +31,7 @@ int main()
 		}
 
 		window.clear();
-		player.update();
+		player.updatePosition();
 		window.draw(player.sprite);
 		window.display();
 	}
