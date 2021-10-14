@@ -1,3 +1,5 @@
+#include <map>
+
 class Player
 {
 private:
