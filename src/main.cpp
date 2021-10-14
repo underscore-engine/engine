@@ -12,31 +12,27 @@ int main()
 	{
 		while (window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-
-			if (event.type == sf::Event::KeyPressed)
+			switch (event.type)
 			{
-				if (event.key.code == sf::Keyboard::D)
-				{
-					player.move_right();
-				}
-				if (event.key.code == sf::Keyboard::A)
-				{
-					player.move_left();
-				}
-				if (event.key.code == sf::Keyboard::S)
-				{
-					player.move_down();
-				}
-				if (event.key.code == sf::Keyboard::W)
-				{
-					player.move_up();
-				}
+				case sf::Event::Closed:
+					window.close();
+					break;
+
+				case sf::Event::KeyPressed:
+					player.handleKeyPress(event.key.code);
+					break;
+
+				case sf::Event::KeyReleased:
+					player.handleKeyRelease(event.key.code);
+					break;
+
+				default:
+					break;
 			}
 		}
 
 		window.clear();
+		player.update();
 		window.draw(player.sprite);
 		window.display();
 	}
