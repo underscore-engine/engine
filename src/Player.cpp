@@ -1,65 +1,58 @@
-class Player
+#include "Player.hpp"
+
+Player::Player()
 {
-private:
-	sf::Texture texture;
-	sf::Vector2f pos;
-	float speed;
+	// Load Texture
+	texture.loadFromFile("assets/main_character.png");
+	sprite.setTexture(texture);
 
-	// A map of keys that are 1 if held but 0 if not
-	std::map<sf::Keyboard::Key, int> held_keys;
+	// Initialise Held Keys Map
+	held_keys[sf::Keyboard::W] = 0;
+	held_keys[sf::Keyboard::A] = 0;
+	held_keys[sf::Keyboard::S] = 0;
+	held_keys[sf::Keyboard::D] = 0;
 
-public:
-	sf::Sprite sprite;
+	// Initialise Position
+	pos = sf::Vector2f(20.f, 50.f);
+	speed = 3.f;
+	sprite.setPosition(pos);
+}
 
-	Player()
+void Player::handleKeyPress(sf::Keyboard::Key key)
+{
+	if (held_keys.find(key) != held_keys.end())
 	{
-		// Load Texture
-		texture.loadFromFile("assets/main_character.png");
-		sprite.setTexture(texture);
-
-		// Initialise Held Keys Map
-		held_keys[sf::Keyboard::W] = 0;
-		held_keys[sf::Keyboard::A] = 0;
-		held_keys[sf::Keyboard::S] = 0;
-		held_keys[sf::Keyboard::D] = 0;
-
-		// Initialise Position
-		pos = sf::Vector2f(20.f, 50.f);
-		speed = 3.f;
-		sprite.setPosition(pos);
+		held_keys[key] = 1;
 	}
+}
 
-	void handleKeyPress(sf::Keyboard::Key key)
+void Player::handleKeyRelease(sf::Keyboard::Key key)
+{
+	if (held_keys.find(key) != held_keys.end())
 	{
-		if (held_keys.find(key) != held_keys.end())
-		{
-			held_keys[key] = 1;
-		}
+		held_keys[key] = 0;
 	}
+}
 
-	void handleKeyRelease(sf::Keyboard::Key key)
-	{
-		if (held_keys.find(key) != held_keys.end())
-		{
-			held_keys[key] = 0;
-		}
-	}
+sf::Vector2f Player::calculateVelocity()
+{
+	const float dx = held_keys.at(sf::Keyboard::D) - held_keys.at(sf::Keyboard::A);
+	const float dy = held_keys.at(sf::Keyboard::S) - held_keys.at(sf::Keyboard::W);
 
-	void updatePosition()
-	{
-		float dx = held_keys.at(sf::Keyboard::D) - held_keys.at(sf::Keyboard::A);
-		float dy = held_keys.at(sf::Keyboard::S) - held_keys.at(sf::Keyboard::W);
+	if (dx == 0 && dy == 0)
+		return sf::Vector2f();
 
-		if (dx == 0 && dy == 0)
-			return;
+	sf::Vector2f vel = sf::Vector2f(dx, dy);
 
-		sf::Vector2f vel = sf::Vector2f(dx, dy);
+	// Normalise Velocity
+	const float mag = sqrtf(vel.x * vel.x + vel.y * vel.y);
+	vel *= speed / mag;
+	return vel;
+}
 
-		// Normalise Velocity
-		float mag = sqrtf(vel.x * vel.x + vel.y * vel.y);
-		vel *= speed / mag;
-
-		pos += vel;
-		sprite.setPosition(pos);
-	}
-};
+void Player::updatePosition()
+{
+	const sf::Vector2f vel = calculateVelocity();
+	pos += vel;
+	sprite.setPosition(pos);
+}
