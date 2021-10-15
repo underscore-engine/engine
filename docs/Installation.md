@@ -1,4 +1,4 @@
-# Setting up for Welly Comp Sci
+# Setting Up Development Environment
 
 ## Prerequisites
 
