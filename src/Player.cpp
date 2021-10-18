@@ -1,10 +1,12 @@
 #include "Player.hpp"
 
-Player::Player()
+Player::Player(sf::Vector2f _pos, sf::Vector2f _size) :
+	Hitbox { _pos, _size }
 {
 	// Load Texture
 	texture.loadFromFile("assets/main_character.png");
 	sprite.setTexture(texture);
+	size = sf::Vector2f(texture.getSize());
 
 	// Initialise Held Keys Map
 	held_keys[sf::Keyboard::W] = 0;
@@ -13,7 +15,7 @@ Player::Player()
 	held_keys[sf::Keyboard::D] = 0;
 
 	// Initialise Position
-	pos = sf::Vector2f(20.f, 50.f);
+	pos = _pos;
 	speed = 3.f;
 	sprite.setPosition(pos);
 }
@@ -50,9 +52,24 @@ sf::Vector2f Player::calculateVelocity()
 	return vel;
 }
 
-void Player::updatePosition()
+void Player::updatePosition(StaticSprite* platforms)
 {
-	const sf::Vector2f vel = calculateVelocity();
+	sf::Vector2f vel = calculateVelocity();
+	if (vel.x == 0 && vel.y == 0)
+		return;
+
 	pos += vel;
+
+	sf::Vector2f new_vels[2];
+	for (int i = 0; i < 1; i++)
+	{
+		if (overlaps(platforms[i]))
+		{
+			correctHitboxOverlap(new_vels, platforms[i], vel, sf::Vector2f());
+			pos += new_vels[0];
+			/* (Would update velocity of second object, but its static, and so vel always = 0) */
+		}
+	}
+
 	sprite.setPosition(pos);
 }
