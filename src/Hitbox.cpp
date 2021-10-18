@@ -6,6 +6,17 @@ Hitbox::Hitbox(sf::Vector2f _pos, sf::Vector2f _size = sf::Vector2f(0, 0))
 	size = _size;
 }
 
+sf::RectangleShape Hitbox::get_hitbox_outline()
+{
+	sf::RectangleShape rect;
+	rect.setSize(size);
+	rect.setFillColor(sf::Color::Transparent);
+	rect.setOutlineColor(sf::Color::Red);
+	rect.setOutlineThickness(5);
+	rect.setPosition(pos.x, pos.y);
+	return rect;
+}
+
 bool Hitbox::overlaps(Hitbox h)
 {
 	// If one rectangle is on left side of other

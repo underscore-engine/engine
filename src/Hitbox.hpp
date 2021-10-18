@@ -33,6 +33,8 @@ public:
 	 *         velocity paramters.
 	 */
 	sf::Vector2f* correctHitboxOverlap(sf::Vector2f* new_vels, Hitbox other, sf::Vector2f vel, sf::Vector2f other_vel);
+	// Returns a red outline shape to show the user the hitbox (For testing purposes)
+	sf::RectangleShape get_hitbox_outline();
 };
 
 #endif

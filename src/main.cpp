@@ -4,6 +4,7 @@
 
 int main()
 {
+	bool show_hitboxes = false;
 	sf::RenderWindow window(sf::VideoMode(2000, 1500), "Game");
 
 	Player player(sf::Vector2f(200.f, 50.f), sf::Vector2f());
@@ -22,6 +23,10 @@ int main()
 
 				case sf::Event::KeyPressed:
 					player.handleKeyPress(event.key.code);
+					if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && event.key.code == sf::Keyboard::B)
+					{
+						show_hitboxes = !show_hitboxes;
+					}
 					break;
 
 				case sf::Event::KeyReleased:
@@ -42,6 +47,14 @@ int main()
 
 		player.updatePosition(platforms);
 		window.draw(player.sprite);
+
+		if (show_hitboxes)
+		{
+			window.draw(player.get_hitbox_outline());
+
+			for (int i = 0; i < 1; i++)
+				window.draw(platforms[i].get_hitbox_outline());
+		}
 
 		window.display();
 	}
