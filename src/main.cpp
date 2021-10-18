@@ -38,6 +38,8 @@ int main()
 			}
 		}
 
+		player.updatePosition(platforms);
+
 		window.clear();
 
 		for (int i = 0; i < 1; i++)
@@ -45,7 +47,6 @@ int main()
 			window.draw(platforms[i].sprite);
 		}
 
-		player.updatePosition(platforms);
 		window.draw(player.sprite);
 
 		if (show_hitboxes)
