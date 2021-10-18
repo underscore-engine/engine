@@ -60,6 +60,34 @@ The initial response for how to apply the meeting sides was to measure the dista
 
 In the above diagram is a system where there is an object that moves and overlaps with a stationary object. When they overlap, the distance between meeting sides is calculated and they are both moved by half of it in opposite directions to counter it. However this results in C – a supposedly static object – changing its position, which therefore must be wrong. This means that instead the overlap should not be split into halves, but instead split into two parts dependents on the ratio between the velocities of the two objects. Then in this scenario, object C would get no correctional displacement as they make up 0% of the net velocity.
 
+## Known problems as of writing version 1 of this
+
+Now that I have finished writing this, I have thought of a couple extra edge cases:
+
+- There is still the possibility that there are two objects moving opposite to each other so quickly that in one frame of the game loop they pass straight through each other. This would mean that they never overlap and therefore never collide. As of right now I cannot think of an easy way to fix this in a non-brute-force calculation method.
+
+- The other potential problem would be if there were three objects where one was in the middle and the other two were both moving towards the centre but from different sides. In this scenario I picture the calculation for the first collision being done, causing these two objects to then be assumed to be not overlapping. However, then during the same frame calculation period, the other object would calculate the collision with the middle object causing the middle object to move back (and therefore into the first object it collided with). Since this is still the same game loop, there would not be another calculation between these objects and the game would continue. This would mean that a big assumption made – that the objects are definitely not overlapping before the movement – is no longer true, and I assume this could wreak havoc with potential bugs and errors.
+
+The main point is that these scenarios should both be pretty uncommon and also they shouldn’t break everything else so it is not too important as of now.
+
+## Additions after writing the code (for the first time)
+
+I am now writing this after I have finished building what seems to be a working collision detection system. It is possible that there are problems with it that just haven't appeared in the multitude of tests I have done (walking the player into the sides of one platform :|), but when building I still found that there were a couple of cases that I did not account for.
+
+### Better method of checking overlaps
+
+Before writing the first version of this I thought I new how to build a fairly good function to check if two rectangles were overlapping, but this ended up causing problems because I assumed a malperforming function was working, causing me to try to debug working areas of code. Once I realised this was the problem, I decided it would be worth it to just look up the most efficient method and found [this article](https://www.geeksforgeeks.org/find-two-rectangles-overlap/). I won't explain it here because the link is literally right there, so I'll just add that the difference between theirs and mine is that our classes record the top-left position and the dimensions instead of the top-left and bottom-right positions. But this can easily be accounted for.
+
+### Missed edge case with diagonal movement
+
+Another problem was one that I had missed since I had assumed that I could simplify the problem to horizontal and vertical independence without loss of generality. However the following diagram presents the problem I ran into.
+
+![Diagram9](img/collision/9.png)
+
+In the diagram, moving object M is moving in a diagonal direction toward the static platform-like object. The problem was that I would work out the displacement required to undo the overlap for both x and y direction and then apply both. However this would cause the box in this case to jump all the way to the left of the platform, because it needs to move opposite to its meeting side.
+
+What we actually want is to apply the horizontal velocity with no adjustments and only correct the vertical displacement. To do this I would compare the meeting side distances for each axis. I would then choose to only apply the correctional displacement of the lowest non-zero axis so that the moving object would move the shortest distance to undo the overlap. While technically this is not how it would work in reality (_Consider if the horizontal displacement was very large, there would be a massive difference in meeting sides, and a small vertical displacement would then lead to still popping out vertically due to the distance being lower. When in reality the object should probably go all the way back horizontally._), it makes sense as a fix for most cases.
+
 ## TL;DR
 
 Here is the problem:
@@ -79,14 +107,5 @@ Here are the steps to take to correct it:
   - Calculate percentage of each velocity out of the total added magnitude of both vectors
   - Calculate distance between meeting sides
   - Calculate correctional displacement by taking the percentage of the distance for each object both calculated earlier
-  - Move both objects these distances in the direction opposite to which side the meeting side is on
-
-## Known problems as of writing this
-
-Now that I have finished writing this, I have thought of a couple extra edge cases:
-
-- There is still the possibility that there are two objects moving opposite to each other so quickly that in one frame of the game loop they pass straight through each other. This would mean that they never overlap and therefore never collide. As of right now I cannot think of an easy way to fix this in a non-brute-force calculation method.
-
-- The other potential problem would be if there were three objects where one was in the middle and the other two were both moving towards the centre but from different sides. In this scenario I picture the calculation for the first collision being done, causing these two objects to then be assumed to be not overlapping. However, then during the same frame calculation period, the other object would calculate the collision with the middle object causing the middle object to move back (and therefore into the first object it collided with). Since this is still the same game loop, there would not be another calculation between these objects and the game would continue. This would mean that a big assumption made – that the objects are definitely not overlapping before the movement – is no longer true, and I assume this could wreak havoc with potential bugs and errors.
-
-The main point is that these scenarios should both be pretty uncommon and also they shouldn’t break everything else so it is not too important as of now.
+  - Set direction of these distances to opposite the side the meeting side is on
+  - Apply the lowest non-zero correctional distance only to the object to undo the overlap
