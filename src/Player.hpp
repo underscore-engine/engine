@@ -16,7 +16,6 @@ class Player : public Hitbox
 private:
 	sf::Texture texture;
 	float speed;
-
 	// A map of keys that are 1 if held but 0 if not
 	std::unordered_map<sf::Keyboard::Key, bool> held_keys;
 

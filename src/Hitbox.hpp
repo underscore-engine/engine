@@ -18,6 +18,7 @@ private:
 
 public:
 	sf::Vector2f size;
+	bool notGrounded;
 	Hitbox(sf::Vector2f _pos, sf::Vector2f _size);
 	// Finds whether two Hitboxes truly overlap
 	bool overlaps(Hitbox h);

@@ -1,5 +1,5 @@
 #include "FrameRate.hpp"
-#include "Hitbox.hpp"
+// #include "Hitbox.hpp"
 #include "Player.hpp"
 #include "StaticSprite.hpp"
 
@@ -7,11 +7,11 @@ int main()
 {
 	bool show_hitboxes = false;
 
-	sf::RenderWindow window(sf::VideoMode(2000, 1500), "Game");
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Game");
 
 	Player player(sf::Vector2f(500.f, 0.f), sf::Vector2f());
 	StaticSprite platforms[2] = { StaticSprite("assets/platform.png", sf::Vector2f(10.f, 500.f)),
-		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 1000.f)) };
+		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 720.f)) };
 
 	FrameRateTracker frame_tracker;
 
@@ -33,7 +33,8 @@ int main()
 					{
 						show_hitboxes = !show_hitboxes;
 					}
-					else if (event.key.code == sf::Keyboard::Space)
+					//Only jumps is the player is on the ground
+					else if (event.key.code == sf::Keyboard::Space && player.notGrounded != true)
 					{
 						player.vel.y -= 5.f;
 					}
