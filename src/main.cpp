@@ -9,8 +9,8 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(2000, 1500), "Game");
 
-	Player player(sf::Vector2f(500.f, 500.f), sf::Vector2f());
-	StaticSprite platforms[2] = { StaticSprite("assets/platform.png", sf::Vector2f(100.f, 1000.f)),
+	Player player(sf::Vector2f(500.f, 0.f), sf::Vector2f());
+	StaticSprite platforms[2] = { StaticSprite("assets/platform.png", sf::Vector2f(10.f, 500.f)),
 		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 1000.f)) };
 
 	FrameRateTracker frame_tracker;

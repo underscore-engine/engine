@@ -48,11 +48,13 @@ sf::Vector2f* Hitbox::correctHitboxOverlap(sf::Vector2f* new_vels, Hitbox other,
 	{
 		new_vels[0] = sf::Vector2f(0, y_displacements[0]);
 		new_vels[1] = sf::Vector2f(0, y_displacements[1]);
+		vel.y = 0; // PLEASE CHANGE THIS LATER
 	}
 	else
 	{
 		new_vels[0] = sf::Vector2f(x_displacements[0], y_displacements[0]);
 		new_vels[1] = sf::Vector2f(x_displacements[1], y_displacements[1]);
+		vel.y = 0; // PLEASE CHANGE THIS LATER
 	}
 
 	return new_vels;

@@ -17,7 +17,7 @@ public:
 	static sf::Vector2f g;
 	// Function that calculates and applies Physics vector
 	Physics(sf::Vector2f pos);
-	void update();
+	void update(sf::Vector2f horizontalVel);
 };
 
 #endif
