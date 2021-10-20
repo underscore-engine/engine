@@ -9,11 +9,13 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(2000, 1500), "Game");
 
-	Player player(sf::Vector2f(200.f, 50.f), sf::Vector2f());
-	StaticSprite platforms[1] = { StaticSprite("assets/platform.png", sf::Vector2f(500.f, 500.f)) };
+	Player player(sf::Vector2f(500.f, 500.f), sf::Vector2f());
+	StaticSprite platforms[2] = { StaticSprite("assets/platform.png", sf::Vector2f(100.f, 1000.f)),
+		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 1000.f)) };
 
 	FrameRateTracker frame_tracker;
 
+	// Main Game Loop
 	sf::Event event;
 	while (window.isOpen())
 	{
@@ -46,7 +48,7 @@ int main()
 
 		window.clear();
 
-		for (unsigned int i = 0; i < 1; i++)
+		for (int i = 0; i < 2; i++)
 		{
 			window.draw(platforms[i].sprite);
 		}
@@ -57,7 +59,7 @@ int main()
 		{
 			window.draw(player.get_hitbox_outline());
 
-			for (unsigned int i = 0; i < 1; i++)
+			for (unsigned int i = 0; i < 2; i++)
 				window.draw(platforms[i].get_hitbox_outline());
 		}
 

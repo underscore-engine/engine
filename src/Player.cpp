@@ -64,7 +64,7 @@ void Player::updatePosition(StaticSprite* platforms)
 	pos += vel;
 
 	sf::Vector2f new_vels[2];
-	for (unsigned int i = 0; i < 1; i++)
+	for (unsigned int i = 0; i < 2; i++)
 	{
 		if (overlaps(platforms[i]))
 		{
