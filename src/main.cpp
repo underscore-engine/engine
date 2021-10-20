@@ -33,6 +33,10 @@ int main()
 					{
 						show_hitboxes = !show_hitboxes;
 					}
+					else if (event.key.code == sf::Keyboard::Space)
+					{
+						player.vel.y -= 5.f;
+					}
 					break;
 
 				case sf::Event::KeyReleased:
@@ -63,7 +67,7 @@ int main()
 				window.draw(platforms[i].get_hitbox_outline());
 		}
 
-		frame_tracker.update();
+		frame_tracker.update(std::to_string(player.vel.y));
 		window.draw(frame_tracker.text);
 
 		window.display();

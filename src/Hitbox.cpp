@@ -31,10 +31,10 @@ bool Hitbox::overlaps(Hitbox h)
 }
 
 // ========== OVERLAP CORRECTION LOGIC ==========
-sf::Vector2f* Hitbox::correctHitboxOverlap(sf::Vector2f* new_vels, Hitbox other, sf::Vector2f vel, sf::Vector2f other_vel)
+sf::Vector2f* Hitbox::correctHitboxOverlap(sf::Vector2f* new_vels, Hitbox other, sf::Vector2f _vel, sf::Vector2f other_vel)
 {
-	const float* x_displacements = correctHitboxOverlapX(other, vel.x, other_vel.x);
-	const float* y_displacements = correctHitboxOverlapY(other, vel.y, other_vel.y);
+	const float* x_displacements = correctHitboxOverlapX(other, _vel.x, other_vel.x);
+	const float* y_displacements = correctHitboxOverlapY(other, _vel.y, other_vel.y);
 
 	const float x_disp_mag = std::abs(x_displacements[0]) + std::abs(x_displacements[1]);
 	const float y_disp_mag = std::abs(y_displacements[0]) + std::abs(y_displacements[1]);

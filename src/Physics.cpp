@@ -1,6 +1,6 @@
 #include "Physics.hpp"
 
-sf::Vector2f Physics::g { sf::Vector2f(0, 0.01f) };
+sf::Vector2f Physics::g { sf::Vector2f(0, 0.06f) };
 
 Physics::Physics(sf::Vector2f _pos)
 {
