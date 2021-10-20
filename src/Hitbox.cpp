@@ -26,7 +26,7 @@ bool Hitbox::overlaps(Hitbox h)
 	}
 	// If one rectangle is on below the other
 	//Sets the not grounded value to false, meaning the player is on the ground and can jump
-	if (pos.y + size.y <= h.pos.y || h.pos.y + h.size.y <= pos.y){
+	else if (pos.y + size.y <= h.pos.y || h.pos.y + h.size.y <= pos.y){
 		notGrounded = true;
 		return false;
 	}
