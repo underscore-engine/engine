@@ -1,3 +1,4 @@
+#include "FrameRate.hpp"
 #include "Hitbox.hpp"
 #include "Player.hpp"
 #include "StaticSprite.hpp"
@@ -5,10 +6,13 @@
 int main()
 {
 	bool show_hitboxes = false;
+
 	sf::RenderWindow window(sf::VideoMode(2000, 1500), "Game");
 
 	Player player(sf::Vector2f(200.f, 50.f), sf::Vector2f());
 	StaticSprite platforms[1] = { StaticSprite("assets/platform.png", sf::Vector2f(500.f, 500.f)) };
+
+	FrameRateTracker frame_tracker;
 
 	sf::Event event;
 	while (window.isOpen())
@@ -42,7 +46,7 @@ int main()
 
 		window.clear();
 
-		for (int i = 0; i < 1; i++)
+		for (unsigned int i = 0; i < 1; i++)
 		{
 			window.draw(platforms[i].sprite);
 		}
@@ -53,9 +57,12 @@ int main()
 		{
 			window.draw(player.get_hitbox_outline());
 
-			for (int i = 0; i < 1; i++)
+			for (unsigned int i = 0; i < 1; i++)
 				window.draw(platforms[i].get_hitbox_outline());
 		}
+
+		frame_tracker.update();
+		window.draw(frame_tracker.text);
 
 		window.display();
 	}
