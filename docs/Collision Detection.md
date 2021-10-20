@@ -76,7 +76,7 @@ I am now writing this after I have finished building what seems to be a working 
 
 ### Better method of checking overlaps
 
-Before writing the first version of this I thought I new how to build a fairly good function to check if two rectangles were overlapping, but this ended up causing problems because I assumed a malperforming function was working, causing me to try to debug working areas of code. Once I realised this was the problem, I decided it would be worth it to just look up the most efficient method and found [this article](https://www.geeksforgeeks.org/find-two-rectangles-overlap/). I won't explain it here because the link is literally right there, so I'll just add that the difference between theirs and mine is that our classes record the top-left position and the dimensions instead of the top-left and bottom-right positions. But this can easily be accounted for.
+Before writing the first version of this I thought I knew how to build a fairly good function to check if two rectangles were overlapping, but this ended up causing problems because I assumed a malperforming function was working, causing me to try to debug working areas of code. Once I realised this was the problem, I decided it would be worth it to just look up the most efficient method and found [this article](https://www.geeksforgeeks.org/find-two-rectangles-overlap/). I won't explain it here because the link is literally right there, so I'll just add that the difference between theirs and mine is that our classes record the top-left position and the dimensions instead of the top-left and bottom-right positions. But this can easily be accounted for.
 
 ### Missed edge case with diagonal movement
 

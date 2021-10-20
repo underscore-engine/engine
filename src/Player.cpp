@@ -13,6 +13,7 @@ Player::Player(sf::Vector2f _pos, sf::Vector2f _size) :
 	held_keys[sf::Keyboard::A] = 0;
 	held_keys[sf::Keyboard::S] = 0;
 	held_keys[sf::Keyboard::D] = 0;
+	held_keys[sf::Keyboard::Space] = 0;
 
 	// Initialise Position
 	pos = _pos;
@@ -39,7 +40,8 @@ void Player::handleKeyRelease(sf::Keyboard::Key key)
 sf::Vector2f Player::calculateVelocity()
 {
 	const float dx = held_keys.at(sf::Keyboard::D) - held_keys.at(sf::Keyboard::A);
-	const float dy = held_keys.at(sf::Keyboard::S) - held_keys.at(sf::Keyboard::W);
+	// const float dy = held_keys.at(sf::Keyboard::S) - held_keys.at(sf::Keyboard::W);
+	const float dy = held_keys.at(sf::Keyboard::Space);
 
 	if (dx == 0 && dy == 0)
 		return sf::Vector2f();
@@ -55,6 +57,7 @@ sf::Vector2f Player::calculateVelocity()
 void Player::updatePosition(StaticSprite* platforms)
 {
 	sf::Vector2f vel = calculateVelocity();
+
 	if (vel.x == 0 && vel.y == 0)
 		return;
 
