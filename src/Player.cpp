@@ -37,32 +37,33 @@ void Player::handleKeyRelease(sf::Keyboard::Key key)
 	}
 }
 
-sf::Vector2f Player::calculateVelocity()
-{
-	const float dx = held_keys.at(sf::Keyboard::D) - held_keys.at(sf::Keyboard::A);
-	// const float dy = held_keys.at(sf::Keyboard::S) - held_keys.at(sf::Keyboard::W);
-	const float dy = held_keys.at(sf::Keyboard::Space);
+// sf::Vector2f Player::calculateVelocity()
+// {
+// 	const float dx = held_keys.at(sf::Keyboard::D) - held_keys.at(sf::Keyboard::A);
+// 	// const float dy = held_keys.at(sf::Keyboard::S) - held_keys.at(sf::Keyboard::W);
+// 	const float dy = held_keys.at(sf::Keyboard::Space);
 
-	if (dx == 0 && dy == 0)
-		return sf::Vector2f();
+// 	if (dx == 0 && dy == 0)
+// 		return sf::Vector2f();
 
-	sf::Vector2f vel = sf::Vector2f(dx, dy);
+// 	sf::Vector2f vel = sf::Vector2f(dx, dy);
 
-	// Normalise Velocity
-	const float mag = sqrtf(vel.x * vel.x + vel.y * vel.y);
-	vel *= speed / mag;
-	return vel;
-}
+// 	// Normalise Velocity
+// 	const float mag = sqrtf(vel.x * vel.x + vel.y * vel.y);
+// 	vel *= speed / mag;
+// 	return vel;
+// }
 
 void Player::updatePosition(StaticSprite* platforms)
 {
-	sf::Vector2f vel = calculateVelocity();
+	// sf::Vector2f vel = calculateVelocity();
 
-	if (vel.x == 0 && vel.y == 0)
-		return;
+	// if (vel.x == 0 && vel.y == 0)
+	// 	return;
 
-	pos += vel;
+	update();
 
+	std::cout << platforms[0].pos.x << std::endl;
 	sf::Vector2f new_vels[2];
 	for (unsigned int i = 0; i < 2; i++)
 	{

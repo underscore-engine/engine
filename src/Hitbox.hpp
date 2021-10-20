@@ -1,12 +1,14 @@
 #ifndef Hitbox_H
 #define Hitbox_H
 
+#include "Physics.hpp"
+
 /**
  * An inherited base class to handle collision detection between sprites
  * @param _pos A vector for the top left point of the rect
  * @param _size A vector giving the width and height of the rect
  */
-class Hitbox
+class Hitbox : public Physics
 {
 private:
 	// Finds the horizontal displacement to correct an overlap
@@ -15,7 +17,6 @@ private:
 	float* correctHitboxOverlapY(Hitbox other, float dy, float other_dy);
 
 public:
-	sf::Vector2f pos;
 	sf::Vector2f size;
 	Hitbox(sf::Vector2f _pos, sf::Vector2f _size);
 	// Finds whether two Hitboxes truly overlap

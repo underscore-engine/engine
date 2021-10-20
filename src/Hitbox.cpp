@@ -1,8 +1,8 @@
 #include "Hitbox.hpp"
 
-Hitbox::Hitbox(sf::Vector2f _pos, sf::Vector2f _size = sf::Vector2f(0, 0))
+Hitbox::Hitbox(sf::Vector2f _pos, sf::Vector2f _size = sf::Vector2f(0, 0)) :
+	Physics { _pos }
 {
-	pos = _pos;
 	size = _size;
 }
 

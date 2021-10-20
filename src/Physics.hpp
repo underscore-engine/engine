@@ -11,11 +11,13 @@
 class Physics
 {
 public:
-	sf::Vector2f pos2;
-	sf::Vector2f size2;
+	sf::Vector2f pos;
+	sf::Vector2f vel;
+	sf::Vector2f acc;
+	static sf::Vector2f g;
 	// Function that calculates and applies Physics vector
-	Physics(sf::Vector2f _pos2, sf::Vector2f _size2);
-	void applyGravity();
+	Physics(sf::Vector2f pos);
+	void update();
 };
 
 #endif
