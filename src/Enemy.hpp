@@ -16,13 +16,13 @@ class Enemy : public Hitbox
 {
 private:
 	sf::Texture texture;
-	float speed;
+	sf::Vector2f vel;
 
 public:
 	sf::Sprite sprite;
 	Enemy(sf::Vector2f _pos, sf::Vector2f _size);
 
-	sf::Vector2f calculateVelocity();
+	void calculateVelocity();
 
 	// Updates the position of the sprite
 	void updatePosition(StaticSprite* platforms);

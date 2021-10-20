@@ -12,45 +12,51 @@ Enemy::Enemy(sf::Vector2f _pos, sf::Vector2f _size) :
 
 	// Initialise Position
 	pos = _pos;
-	speed = 3.f;
+	sf::Vector2f vel(2.f, 0.f);
+
 	sprite.setPosition(pos);
 }
 
-sf::Vector2f Enemy::calculateVelocity()
+void Enemy::calculateVelocity()
 {
-	/**
-	const float dx = 0;
-	// const float dy = held_keys.at(sf::Keyboard::S) - held_keys.at(sf::Keyboard::W);
-	const float dy = 0;
+	return;
 
-	if (dx == 0 && dy == 0)
-		return sf::Vector2f();
+	float speed;
 
-	sf::Vector2f vel = sf::Vector2f(dx, dy);
-
-	// Normalise Velocity
-	const float mag = sqrtf(vel.x * vel.x + vel.y * vel.y);
-	vel *= speed / mag;
-	return vel; */
-	sf::Vector2f vel(2.f, 0.f);
+	bool moving_right;
+	bool moving_left;
 
 	if (pos.x > 1500.f)
 	{
-		vel.x += -4.f;
+		moving_left = true;
+		moving_right = false;
 	}
-	if (pos.x < 500.f)
-	{
-		vel.x += 4.f;
-	}
+	//if (pos.x < 50.f)
+	//{
+	//	moving_left = false;
+	//	moving_right = true;
+	//}
 
-	return vel;
+	if (moving_left)
+	{
+		speed = 2.f;
+		vel.x = speed;
+	}
+	else if (moving_right)
+	{
+		speed = -2.f;
+		vel.x = speed;
+	}
 }
 
 void Enemy::updatePosition(StaticSprite* platforms)
 {
-	sf::Vector2f vel = calculateVelocity();
 
-	pos += vel;
+	//calculateVelocity();
+
+	//sf::Vector2f vel(1.f,0.f);
+
+	//pos += vel;
 
 	sf::Vector2f new_vels[2];
 	for (unsigned int i = 0; i < 1; i++)
