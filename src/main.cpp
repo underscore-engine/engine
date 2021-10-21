@@ -33,10 +33,12 @@ int main()
 					{
 						show_hitboxes = !show_hitboxes;
 					}
-					//Only jumps is the player is on the ground
-					else if (event.key.code == sf::Keyboard::Space && player.notGrounded != true)
+					//Only jumps is the player is on the ground or when they have a jump available
+					else if (event.key.code == sf::Keyboard::Space && (player.notGrounded != true || player.jumpsLeft > 0))
 					{
 						player.vel.y -= 5.f;
+						//Deincrements the jump counter
+						player.jumpsLeft -= 1;
 					}
 					break;
 

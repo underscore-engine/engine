@@ -1,7 +1,7 @@
 #include "Player.hpp"
 
 Player::Player(sf::Vector2f _pos, sf::Vector2f _size) :
-	Hitbox { _pos, _size}
+	Hitbox { _pos, _size }
 {
 	// Load Texture
 	texture.loadFromFile("assets/main_character.png");

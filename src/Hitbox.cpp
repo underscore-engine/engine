@@ -4,7 +4,6 @@ Hitbox::Hitbox(sf::Vector2f _pos, sf::Vector2f _size = sf::Vector2f(0, 0)) :
 	Physics { _pos }
 {
 	size = _size;
-
 }
 
 sf::RectangleShape Hitbox::get_hitbox_outline()
@@ -21,18 +20,23 @@ sf::RectangleShape Hitbox::get_hitbox_outline()
 bool Hitbox::overlaps(Hitbox h)
 {
 	// If one rectangle is on left side of other
-	if (pos.x + size.x <= h.pos.x || h.pos.x + h.size.x <= pos.x){
+	if (pos.x + size.x <= h.pos.x || h.pos.x + h.size.x <= pos.x)
+	{
 		return false;
 	}
 	// If one rectangle is on below the other
-	//Sets the not grounded value to false, meaning the player is on the ground and can jump
-	else if (pos.y + size.y <= h.pos.y || h.pos.y + h.size.y <= pos.y){
+	//Sets the not grounded value to true, meaning the player is on the ground and can jump
+	else if (pos.y + size.y <= h.pos.y || h.pos.y + h.size.y <= pos.y)
+	{
 		notGrounded = true;
 		return false;
 	}
-	//As a default sets the not grounded value to true, meaning the player is in the air and can't jump
-	else{
+	//As a default sets the not grounded value to false, meaning the player is in the air and can't jump
+	else
+	{
 		notGrounded = false;
+		//When the player touched the ground resets the jump counter
+		jumpsLeft = maxJump;
 		return true;
 	}
 }

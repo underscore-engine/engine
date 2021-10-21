@@ -16,6 +16,8 @@ public:
 	sf::Vector2f acc;
 	static sf::Vector2f g;
 	static float termVel;
+	static int maxJump;
+	int jumpsLeft;
 	// Function that calculates and applies Physics vector
 	Physics(sf::Vector2f pos);
 	void update(sf::Vector2f horizontalVel);
