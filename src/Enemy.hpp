@@ -22,10 +22,8 @@ public:
 	sf::Sprite sprite;
 	Enemy(sf::Vector2f _pos, sf::Vector2f _size);
 
-	void calculateVelocity();
-
 	// Updates the position of the sprite
-	void updatePosition(StaticSprite* platforms);
+	void updatePosition(StaticSprite* platforms, sf::Vector2f player_pos);
 };
 
 #endif
