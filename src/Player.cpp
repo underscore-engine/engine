@@ -37,10 +37,9 @@ void Player::handleKeyRelease(sf::Keyboard::Key key)
 	}
 }
 
-sf::Vector2f Player::getHorizontalMovement()
+float Player::getHorizontalMovement()
 {
-	const float dx = held_keys.at(sf::Keyboard::D) - held_keys.at(sf::Keyboard::A);
-	return sf::Vector2f(dx * speed, 0);
+	return speed * (held_keys.at(sf::Keyboard::D) - held_keys.at(sf::Keyboard::A));
 }
 
 void Player::updatePosition(StaticSprite* platforms)

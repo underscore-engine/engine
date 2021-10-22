@@ -21,9 +21,8 @@ bool Hitbox::overlaps(Hitbox h)
 {
 	// If one rectangle is on left side of other
 	if (pos.x + size.x <= h.pos.x || h.pos.x + h.size.x <= pos.x)
-	{
 		return false;
-	}
+
 	// If one rectangle is on below the other
 	//Sets the not grounded value to true, meaning the player is on the ground and can jump
 	else if (pos.y + size.y <= h.pos.y || h.pos.y + h.size.y <= pos.y)
@@ -36,7 +35,7 @@ bool Hitbox::overlaps(Hitbox h)
 	{
 		notGrounded = false;
 		//When the player touched the ground resets the jump counter
-		jumpsLeft = maxJump;
+		jumpsLeft = maxJumps;
 		return true;
 	}
 }

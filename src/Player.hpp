@@ -27,7 +27,7 @@ public:
 	// Handles a key release event from the keyboard
 	void handleKeyRelease(sf::Keyboard::Key key);
 	// Calculates the velocity based on what keys are pressed down
-	sf::Vector2f getHorizontalMovement();
+	float getHorizontalMovement();
 	// Updates the position of the sprite
 	void updatePosition(StaticSprite* platforms);
 };

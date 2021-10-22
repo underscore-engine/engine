@@ -11,16 +11,23 @@
 class Physics
 {
 public:
+	// Gravitational constant
+	static sf::Vector2f g;
+	// The maximum velocity magnitude that the player can be moving
+	static float termVel;
+
+	// The maximum number of jumps
+	static int maxJumps;
+	// The number of jumps available - resets upon touching ground
+	int jumpsLeft;
+
 	sf::Vector2f pos;
 	sf::Vector2f vel;
 	sf::Vector2f acc;
-	static sf::Vector2f g;
-	static float termVel;
-	static int maxJump;
-	int jumpsLeft;
+
 	// Function that calculates and applies Physics vector
 	Physics(sf::Vector2f pos);
-	void update(sf::Vector2f horizontalVel);
+	void update(float horizontalVel);
 };
 
 #endif
