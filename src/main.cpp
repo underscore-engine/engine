@@ -13,7 +13,8 @@ int main()
 	Player player(sf::Vector2f(500.f, 0.f), sf::Vector2f());
 	StaticSprite platforms[2] = { StaticSprite("assets/platform.png", sf::Vector2f(10.f, 500.f)),
 		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 720.f)) };
-	Enemy enemies = { Enemy(sf::Vector2f(100.f, 0.f), sf::Vector2f()), Enemy(sf::Vector2f(1010.f, 700.f)) };
+	Enemy enemies[2] = { Enemy(sf::Vector2f(0.f, 210.f), sf::Vector2f()),
+		Enemy(sf::Vector2f(1920.f, 420.f), sf::Vector2f()) };
 	FrameRateTracker frame_tracker;
 
 	// Main Game Loop
@@ -58,7 +59,13 @@ int main()
 
 		for (int i = 0; i < 2; i++)
 		{
+			enemies[i].updatePosition(platforms, player.pos);
+		}
+
+		for (int i = 0; i < 2; i++)
+		{
 			window.draw(platforms[i].sprite);
+			window.draw(enemies[i].sprite);
 		}
 
 		window.draw(player.sprite);

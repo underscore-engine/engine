@@ -23,7 +23,9 @@ void Enemy::updatePosition(StaticSprite* platforms, sf::Vector2f player_pos)
 
 	// Finds closest path to player
 	// Assuming no obstacles
-	sf::Vector2f vel = player_pos - pos;
+	sf::Vector2f vel;
+	vel.x = player_pos.x - pos.x;
+	vel.y = 0;
 
 	// Normalises path to a unit vector
 	const float mag = sqrtf(vel.x * vel.x + vel.y * vel.y);
