@@ -1,8 +1,8 @@
 #include "Hitbox.hpp"
 
-Hitbox::Hitbox(sf::Vector2f _pos, sf::Vector2f _size = sf::Vector2f(0, 0))
+Hitbox::Hitbox(sf::Vector2f _pos, sf::Vector2f _size = sf::Vector2f(0, 0)) :
+	Physics { _pos }
 {
-	pos = _pos;
 	size = _size;
 }
 
@@ -21,20 +21,31 @@ bool Hitbox::overlaps(Hitbox h)
 {
 	// If one rectangle is on left side of other
 	if (pos.x + size.x <= h.pos.x || h.pos.x + h.size.x <= pos.x)
+	{
 		return false;
-
-	// If one rectangle is above other
-	if (pos.y + size.y <= h.pos.y || h.pos.y + h.size.y <= pos.y)
+	}
+	// If one rectangle is on below the other
+	//Sets the not grounded value to true, meaning the player is on the ground and can jump
+	else if (pos.y + size.y <= h.pos.y || h.pos.y + h.size.y <= pos.y)
+	{
+		notGrounded = true;
 		return false;
-
-	return true;
+	}
+	//As a default sets the not grounded value to false, meaning the player is in the air and can't jump
+	else
+	{
+		notGrounded = false;
+		//When the player touched the ground resets the jump counter
+		jumpsLeft = maxJump;
+		return true;
+	}
 }
 
 // ========== OVERLAP CORRECTION LOGIC ==========
-sf::Vector2f* Hitbox::correctHitboxOverlap(sf::Vector2f* new_vels, Hitbox other, sf::Vector2f vel, sf::Vector2f other_vel)
+sf::Vector2f* Hitbox::correctHitboxOverlap(sf::Vector2f* new_vels, Hitbox other, sf::Vector2f _vel, sf::Vector2f other_vel)
 {
-	const float* x_displacements = correctHitboxOverlapX(other, vel.x, other_vel.x);
-	const float* y_displacements = correctHitboxOverlapY(other, vel.y, other_vel.y);
+	const float* x_displacements = correctHitboxOverlapX(other, _vel.x, other_vel.x);
+	const float* y_displacements = correctHitboxOverlapY(other, _vel.y, other_vel.y);
 
 	const float x_disp_mag = std::abs(x_displacements[0]) + std::abs(x_displacements[1]);
 	const float y_disp_mag = std::abs(y_displacements[0]) + std::abs(y_displacements[1]);
@@ -48,11 +59,13 @@ sf::Vector2f* Hitbox::correctHitboxOverlap(sf::Vector2f* new_vels, Hitbox other,
 	{
 		new_vels[0] = sf::Vector2f(0, y_displacements[0]);
 		new_vels[1] = sf::Vector2f(0, y_displacements[1]);
+		vel.y = 0; // PLEASE CHANGE THIS LATER
 	}
 	else
 	{
 		new_vels[0] = sf::Vector2f(x_displacements[0], y_displacements[0]);
 		new_vels[1] = sf::Vector2f(x_displacements[1], y_displacements[1]);
+		vel.y = 0; // PLEASE CHANGE THIS LATER
 	}
 
 	return new_vels;

@@ -14,7 +14,7 @@ private:
 public:
 	sf::Text text;
 	FrameRateTracker();
-	void update();
+	void update(std::string value);
 };
 
 #endif
