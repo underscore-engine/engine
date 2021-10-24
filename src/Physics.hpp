@@ -2,20 +2,24 @@
 #define Physics_H
 
 /**
- * Physics class that handles physics such as gravity for any object that needs it
- *
- * @param _pos2 The initial position of the top left of the player
- * @param _size2 The width and height of the player's hitbox
- *
+ * Physics class that handles physics such as gravity for any object that needs it.
+ * @param pos The initial position of the top left of the phyiscal object
  */
 class Physics
 {
 public:
-	sf::Vector2f pos2;
-	sf::Vector2f size2;
+	// Gravitational constant
+	static sf::Vector2f g;
+	// The maximum velocity magnitude that the player can be moving
+	static float termVel;
+
+	sf::Vector2f pos;
+	sf::Vector2f vel;
+	sf::Vector2f acc;
+
 	// Function that calculates and applies Physics vector
-	Physics(sf::Vector2f _pos2, sf::Vector2f _size2);
-	void applyGravity();
+	Physics(sf::Vector2f pos);
+	void update(float horizontalVel);
 };
 
 #endif
