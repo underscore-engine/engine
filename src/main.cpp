@@ -1,5 +1,5 @@
+#include "Enemy.hpp"
 #include "FrameRate.hpp"
-// #include "Hitbox.hpp"
 #include "Player.hpp"
 #include "StaticSprite.hpp"
 
@@ -12,7 +12,8 @@ int main()
 	Player player(sf::Vector2f(500.f, 0.f), sf::Vector2f());
 	StaticSprite platforms[2] = { StaticSprite("assets/platform.png", sf::Vector2f(10.f, 500.f)),
 		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 720.f)) };
-
+	Enemy enemies[2] = { Enemy(sf::Vector2f(0.f, 210.f), sf::Vector2f()),
+		Enemy(sf::Vector2f(1800.f, 320.f), sf::Vector2f()) };
 	FrameRateTracker frame_tracker;
 
 	// Main Game Loop
@@ -52,18 +53,21 @@ int main()
 
 		for (int i = 0; i < 2; i++)
 		{
+			enemies[i].updatePosition(platforms, player.pos);
+
 			window.draw(platforms[i].sprite);
+			window.draw(enemies[i].sprite);
+
+			if (show_hitboxes)
+			{
+				window.draw(platforms[i].get_hitbox_outline());
+				window.draw(enemies[i].get_hitbox_outline());
+			}
 		}
 
 		window.draw(player.sprite);
-
 		if (show_hitboxes)
-		{
 			window.draw(player.get_hitbox_outline());
-
-			for (unsigned int i = 0; i < 2; i++)
-				window.draw(platforms[i].get_hitbox_outline());
-		}
 
 		frame_tracker.update(std::to_string(player.vel.y));
 		window.draw(frame_tracker.text);
