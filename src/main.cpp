@@ -1,6 +1,5 @@
-#include "FrameRate.hpp"
-// #include "Hitbox.hpp"
 #include "Enemy.hpp"
+#include "FrameRate.hpp"
 #include "Player.hpp"
 #include "StaticSprite.hpp"
 
@@ -14,7 +13,7 @@ int main()
 	StaticSprite platforms[2] = { StaticSprite("assets/platform.png", sf::Vector2f(10.f, 500.f)),
 		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 720.f)) };
 	Enemy enemies[2] = { Enemy(sf::Vector2f(0.f, 210.f), sf::Vector2f()),
-		Enemy(sf::Vector2f(1920.f, 420.f), sf::Vector2f()) };
+		Enemy(sf::Vector2f(1800.f, 320.f), sf::Vector2f()) };
 	FrameRateTracker frame_tracker;
 
 	// Main Game Loop
