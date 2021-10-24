@@ -60,23 +60,20 @@ int main()
 		for (int i = 0; i < 2; i++)
 		{
 			enemies[i].updatePosition(platforms, player.pos);
-		}
 
-		for (int i = 0; i < 2; i++)
-		{
 			window.draw(platforms[i].sprite);
 			window.draw(enemies[i].sprite);
+
+			if (show_hitboxes)
+			{
+				window.draw(platforms[i].get_hitbox_outline());
+				window.draw(enemies[i].get_hitbox_outline());
+			}
 		}
 
 		window.draw(player.sprite);
-
 		if (show_hitboxes)
-		{
 			window.draw(player.get_hitbox_outline());
-
-			for (unsigned int i = 0; i < 2; i++)
-				window.draw(platforms[i].get_hitbox_outline());
-		}
 
 		frame_tracker.update(std::to_string(player.vel.y));
 		window.draw(frame_tracker.text);
