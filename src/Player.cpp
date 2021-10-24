@@ -1,5 +1,7 @@
 #include "Player.hpp"
 
+unsigned int Player::maxJumps { 1 };
+
 Player::Player(sf::Vector2f _pos, sf::Vector2f _size) :
 	Hitbox { _pos, _size }
 {
@@ -24,17 +26,20 @@ Player::Player(sf::Vector2f _pos, sf::Vector2f _size) :
 void Player::handleKeyPress(sf::Keyboard::Key key)
 {
 	if (held_keys.find(key) != held_keys.end())
-	{
 		held_keys[key] = 1;
+
+	if (key == sf::Keyboard::Space && jumpsLeft > 0)
+	{
+		vel.y -= 5.f;
+		if (!isGrounded)
+			jumpsLeft--;
 	}
 }
 
 void Player::handleKeyRelease(sf::Keyboard::Key key)
 {
 	if (held_keys.find(key) != held_keys.end())
-	{
 		held_keys[key] = 0;
-	}
 }
 
 float Player::getHorizontalMovement()
@@ -46,14 +51,19 @@ void Player::updatePosition(StaticSprite* platforms)
 {
 	update(getHorizontalMovement());
 
-	sf::Vector2f new_vels[2];
+	isGrounded = false;
+
+	CollisionFix fix;
 	for (unsigned int i = 0; i < 2; i++)
 	{
 		if (overlaps(platforms[i]))
 		{
-			correctHitboxOverlap(new_vels, platforms[i], vel, sf::Vector2f());
-			pos += new_vels[0];
-			/* (Would update velocity of second object, but its static, and so vel always = 0) */
+			fix = correctHitboxOverlap(platforms[i]);
+			if (fix.h1_direction() == Direction::up)
+			{
+				jumpsLeft = maxJumps;
+				isGrounded = true;
+			}
 		}
 	}
 

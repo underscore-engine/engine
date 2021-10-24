@@ -5,9 +5,9 @@
 
 int main()
 {
-	bool show_hitboxes = false;
-
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Game");
+
+	bool show_hitboxes = false;
 
 	Player player(sf::Vector2f(500.f, 0.f), sf::Vector2f());
 	StaticSprite platforms[2] = { StaticSprite("assets/platform.png", sf::Vector2f(10.f, 500.f)),
@@ -29,17 +29,12 @@ int main()
 
 				case sf::Event::KeyPressed:
 					player.handleKeyPress(event.key.code);
+
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && event.key.code == sf::Keyboard::B)
-					{
 						show_hitboxes = !show_hitboxes;
-					}
-					//Only jumps is the player is on the ground or when they have a jump available
-					else if (event.key.code == sf::Keyboard::Space && (player.notGrounded != true || player.jumpsLeft > 0))
-					{
-						player.vel.y -= 5.f;
-						//Deincrements the jump counter
-						player.jumpsLeft -= 1;
-					}
+
+					else if (event.key.code == sf::Keyboard::R)
+						player.pos = sf::Vector2f(500.f, 0.f);
 					break;
 
 				case sf::Event::KeyReleased:

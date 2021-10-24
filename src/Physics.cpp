@@ -1,8 +1,7 @@
 #include "Physics.hpp"
 
-sf::Vector2f Physics::g { sf::Vector2f(0, 0.06f) };
+sf::Vector2f Physics::g { sf::Vector2f(0, 0.04f) };
 float Physics::termVel { 10.f };
-int Physics::maxJumps { 2 };
 
 Physics::Physics(sf::Vector2f _pos)
 {
