@@ -25,15 +25,16 @@ Player::Player(sf::Vector2f _pos, sf::Vector2f _size) :
 
 void Player::handleKeyPress(sf::Keyboard::Key key)
 {
-	if (held_keys.find(key) != held_keys.end())
-		held_keys[key] = 1;
-
-	if (key == sf::Keyboard::Space && jumpsLeft > 0)
+	const bool jump_not_held = !held_keys[sf::Keyboard::Space] || isGrounded;
+	if (key == sf::Keyboard::Space && jumpsLeft > 0 && jump_not_held)
 	{
 		vel.y -= 5.f;
 		if (!isGrounded)
 			jumpsLeft--;
 	}
+
+	if (held_keys.find(key) != held_keys.end())
+		held_keys[key] = 1;
 }
 
 void Player::handleKeyRelease(sf::Keyboard::Key key)
