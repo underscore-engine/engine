@@ -82,7 +82,8 @@ int main()
 		if (show_hitboxes)
 			window.draw(player.get_hitbox_outline());
 
-		frame_tracker.update(std::to_string(player.vel.y));
+		frame_tracker.add_info("Vel", std::to_string(player.vel.x).substr(0, 4) + "  |  " + std::to_string(player.vel.y).substr(0, 4));
+		frame_tracker.update();
 		window.draw(frame_tracker.text);
 
 		window.display();

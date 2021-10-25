@@ -10,11 +10,13 @@ private:
 	sf::Clock clock;
 	unsigned int elapsed_iterations = 0;
 	sf::Font font;
+	std::string info;
 
 public:
 	sf::Text text;
 	FrameRateTracker();
-	void update(std::string value);
+	void update();
+	void add_info(std::string name, std::string value);
 };
 
 #endif
