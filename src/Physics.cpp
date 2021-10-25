@@ -1,5 +1,7 @@
 #include "Physics.hpp"
 
+extern float deltatime;
+
 sf::Vector2f Physics::g { sf::Vector2f(0, 0.04f) };
 float Physics::termVel { 10.f };
 
@@ -16,8 +18,8 @@ void Physics::update(float horizontalVel = 0.f)
 	acc = sf::Vector2f();
 	acc += g;
 
-	vel += acc;
-	vel = sf::Vector2f(std::min(horizontalVel, termVel), std::min(vel.y, termVel));
+	vel += acc * deltatime;
+	vel = sf::Vector2f(std::min(horizontalVel * deltatime, termVel), std::min(vel.y, termVel));
 
 	pos += vel;
 }

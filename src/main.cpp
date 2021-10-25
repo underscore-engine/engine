@@ -3,23 +3,36 @@
 #include "Player.hpp"
 #include "StaticSprite.hpp"
 
+float deltatime = 0.f;
+
 int main()
 {
+	sf::Clock deltatime_clock;
+
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Game");
 
 	bool show_hitboxes = false;
 
 	Player player(sf::Vector2f(500.f, 0.f), sf::Vector2f());
-	StaticSprite platforms[2] = { StaticSprite("assets/platform.png", sf::Vector2f(10.f, 500.f)),
-		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 720.f)) };
-	Enemy enemies[2] = { Enemy(sf::Vector2f(0.f, 210.f), sf::Vector2f()),
-		Enemy(sf::Vector2f(1800.f, 320.f), sf::Vector2f()) };
+
+	StaticSprite platforms[2] = {
+		StaticSprite("assets/platform.png", sf::Vector2f(10.f, 500.f)),
+		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 720.f))
+	};
+
+	Enemy enemies[2] = {
+		Enemy(sf::Vector2f(0.f, 210.f), sf::Vector2f()),
+		Enemy(sf::Vector2f(1800.f, 320.f), sf::Vector2f())
+	};
+
 	FrameRateTracker frame_tracker;
 
 	// Main Game Loop
 	sf::Event event;
 	while (window.isOpen())
 	{
+		deltatime = deltatime_clock.restart().asSeconds() * 450.f;
+
 		while (window.pollEvent(event))
 		{
 			switch (event.type)
