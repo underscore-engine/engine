@@ -19,7 +19,7 @@ void Physics::update(float horizontalVel = 0.f)
 	acc += g;
 
 	vel += acc * deltatime;
-	vel = sf::Vector2f(std::min(horizontalVel, termVel), std::min(vel.y, termVel));
+	vel = sf::Vector2f(std::min(horizontalVel * deltatime, termVel), std::min(vel.y, termVel));
 
-	pos += vel * deltatime;
+	pos += vel; // * deltatime;
 }

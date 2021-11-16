@@ -1,5 +1,6 @@
 #include "Enemy.hpp"
 #include "FrameRate.hpp"
+#include "Menu.hpp"
 #include "Player.hpp"
 #include "StaticSprite.hpp"
 
@@ -10,6 +11,44 @@ int main()
 	sf::Clock deltatime_clock;
 
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Game");
+
+	Menu menu(window.getSize().x, window.getSize().y);
+
+	sf::Event event;
+	//menu loop
+	while (window.isOpen())
+	{
+		//waits for player to make a choice
+
+		while (window.pollEvent(event))
+		{
+			switch (event.type)
+			{
+				case sf::Event::Closed:
+					window.close();
+					break;
+				case sf::Event::MouseButtonPressed:
+					menu.handleButtonPress(sf::Mouse::getPosition());
+					break;
+				default:
+					break;
+			}
+		}
+
+		if (menu.getSelection(0))
+		{
+			break;
+		}
+		else if (menu.getSelection(2))
+		{
+			window.close();
+		}
+
+		window.clear();
+
+		menu.draw(window);
+		window.display();
+	}
 
 	bool show_hitboxes = false;
 
@@ -22,14 +61,13 @@ int main()
 	};
 
 	Enemy enemies[2] = {
-		Enemy(sf::Vector2f(0.f, 210.f), sf::Vector2f()),
-		Enemy(sf::Vector2f(1800.f, 320.f), sf::Vector2f())
+		Enemy(sf::Vector2f(0.f, 250.f), sf::Vector2f()),
+		Enemy(sf::Vector2f(1800.f, 670.f), sf::Vector2f())
 	};
 
 	FrameRateTracker frame_tracker;
 
 	// Main Game Loop
-	sf::Event event;
 	while (window.isOpen())
 	{
 		deltatime = deltatime_clock.restart().asSeconds() * 450.f;
@@ -50,6 +88,10 @@ int main()
 
 					else if (event.key.code == sf::Keyboard::R)
 						player.pos = sf::Vector2f(500.f, 0.f);
+					break;
+
+				case sf::Event::MouseButtonPressed:
+					//
 					break;
 
 				case sf::Event::KeyReleased:

@@ -17,18 +17,18 @@ Enemy::Enemy(sf::Vector2f _pos, sf::Vector2f _size) :
 void Enemy::updatePosition(StaticSprite* platforms, sf::Vector2f player_pos)
 {
 	float speed = 0.4f;
-
-	// Gets direction to player
 	const float horiz_vel = player_pos.x > pos.x ? speed : -speed;
 	update(horiz_vel);
 
-	for (unsigned int i = 0; i < 2; i++)
+	for (unsigned int i = 0; i < 3; i++)
 	{
 		if (overlaps(platforms[i]))
 		{
 			correctHitboxOverlap(platforms[i]);
 		}
 	}
+
+	// Gets direction to player
 
 	sprite.setPosition(pos);
 }
