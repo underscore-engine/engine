@@ -10,8 +10,6 @@ Enemy::Enemy(sf::Vector2f _pos, sf::Vector2f target_size) :
 void Enemy::updatePosition(StaticSprite* platforms, sf::Vector2f player_pos)
 {
 	float speed = 0.4f;
-
-	// Gets direction to player
 	const float horiz_vel = player_pos.x > pos.x ? speed : -speed;
 	update(horiz_vel);
 

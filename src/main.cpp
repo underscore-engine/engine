@@ -1,5 +1,6 @@
 #include "Enemy.hpp"
 #include "FrameRate.hpp"
+#include "Menu.hpp"
 #include "Player.hpp"
 #include "StaticSprite.hpp"
 
@@ -11,9 +12,48 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Game");
 
-	bool show_hitboxes = false;
+	// Setup our view (camera)
+	sf::View player_view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
 
-	Player player(sf::Vector2f(500.f, 0.f), sf::Vector2f(215.f, 258.f));
+	Menu menu(window.getSize().x, window.getSize().y);
+
+	sf::Event event;
+	//menu loop
+	while (window.isOpen())
+	{
+		//waits for player to make a choice
+
+		while (window.pollEvent(event))
+		{
+			switch (event.type)
+			{
+				case sf::Event::Closed:
+					window.close();
+					break;
+				case sf::Event::MouseButtonPressed:
+					menu.handleButtonPress(sf::Mouse::getPosition());
+					break;
+				default:
+					break;
+			}
+		}
+
+		if (menu.getSelection(0))
+		{
+			break;
+		}
+		else if (menu.getSelection(2))
+		{
+			window.close();
+		}
+
+		window.clear();
+
+		menu.draw(window);
+		window.display();
+	}
+
+	bool show_hitboxes = false;
 
 	StaticSprite platforms[3] = {
 		StaticSprite("assets/platform.png", sf::Vector2f(10.f, 500.f), sf::Vector2f(760.f, 107.f)),
@@ -22,17 +62,21 @@ int main()
 	};
 
 	Enemy enemies[2] = {
-		Enemy(sf::Vector2f(0.f, 210.f), sf::Vector2f(215.f, 258.f)),
-		Enemy(sf::Vector2f(1800.f, 320.f), sf::Vector2f(215.f, 258.f))
+		Enemy(sf::Vector2f(0.f, 250.f), sf::Vector2f(215.f, 258.f)),
+		Enemy(sf::Vector2f(1800.f, 670.f), sf::Vector2f(215.f, 258.f))
 	};
+
+	Player player(sf::Vector2f(500.f, 0.f), sf::Vector2f(215.f, 258.f));
 
 	FrameRateTracker frame_tracker;
 
 	// Main Game Loop
-	sf::Event event;
 	while (window.isOpen())
 	{
 		deltatime = deltatime_clock.restart().asSeconds() * 450.f;
+		// we keep our view centered on the player
+		player_view.setCenter(sf::Vector2f(player.pos.x, 300));
+		window.setView(player_view);
 
 		while (window.pollEvent(event))
 		{
@@ -57,6 +101,10 @@ int main()
 							enemies[1].pos = sf::Vector2f(1800.f, 320.f);
 						}
 					}
+					break;
+
+				case sf::Event::MouseButtonPressed:
+					//
 					break;
 
 				case sf::Event::KeyReleased:
