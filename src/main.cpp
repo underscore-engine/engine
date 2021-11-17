@@ -18,40 +18,42 @@ int main()
 	Menu menu(window.getSize().x, window.getSize().y);
 
 	sf::Event event;
+
+	/*
 	//menu loop
-	// while (window.isOpen())
-	// {
-	// 	//waits for player to make a choice
+	while (window.isOpen())
+	{
+		//waits for player to make a choice
+		while (window.pollEvent(event))
+		{
+			switch (event.type)
+			{
+				case sf::Event::Closed:
+					window.close();
+					break;
+				case sf::Event::MouseButtonPressed:
+					menu.handleButtonPress(sf::Mouse::getPosition());
+					break;
+				default:
+					break;
+			}
+		}
 
-	// 	while (window.pollEvent(event))
-	// 	{
-	// 		switch (event.type)
-	// 		{
-	// 			case sf::Event::Closed:
-	// 				window.close();
-	// 				break;
-	// 			case sf::Event::MouseButtonPressed:
-	// 				menu.handleButtonPress(sf::Mouse::getPosition());
-	// 				break;
-	// 			default:
-	// 				break;
-	// 		}
-	// 	}
+		if (menu.getSelection(0))
+		{
+			break;
+		}
+		else if (menu.getSelection(2))
+		{
+			window.close();
+		}
 
-	// 	if (menu.getSelection(0))
-	// 	{
-	// 		break;
-	// 	}
-	// 	else if (menu.getSelection(2))
-	// 	{
-	// 		window.close();
-	// 	}
+		window.clear();
 
-	// 	window.clear();
-
-	// 	menu.draw(window);
-	// 	window.display();
-	// }
+		menu.draw(window);
+		window.display();
+	}
+	*/
 
 	bool show_hitboxes = false;
 
@@ -127,7 +129,8 @@ int main()
 		// Render the enemies
 		for (int i = 0; i < 2; i++)
 		{
-			enemies[i].updatePosition(platforms, player.pos);
+			enemies[i].updatePosition(platforms, player.getPosition());
+			player.handleCollide(enemies[i]);
 
 			window.draw(enemies[i].sprite);
 
@@ -144,8 +147,15 @@ int main()
 		frame_tracker.add_info("Vel", std::to_string(player.vel.x).substr(0, 4) + "  |  " + std::to_string(player.vel.y).substr(0, 4));
 		frame_tracker.update();
 		window.draw(frame_tracker.text);
+		player.updateHealth();
+		window.draw(player.health_display);
 
 		window.display();
+
+		if (player.getHealth() < 0)
+		{
+			window.close();
+		}
 	}
 
 	return 0;
