@@ -49,7 +49,14 @@ int main()
 						show_hitboxes = !show_hitboxes;
 
 					else if (event.key.code == sf::Keyboard::R)
+					{
 						player.pos = sf::Vector2f(500.f, 0.f);
+						if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
+						{
+							enemies[0].pos = sf::Vector2f(0.f, 210.f);
+							enemies[1].pos = sf::Vector2f(1800.f, 320.f);
+						}
+					}
 					break;
 
 				case sf::Event::KeyReleased:
