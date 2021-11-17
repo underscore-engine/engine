@@ -56,7 +56,7 @@ void Player::updatePosition(StaticSprite* platforms)
 	isGrounded = false;
 
 	CollisionFix fix;
-	for (unsigned int i = 0; i < 2; i++)
+	for (unsigned int i = 0; i < 3; i++)
 	{
 		if (overlaps(platforms[i]))
 		{

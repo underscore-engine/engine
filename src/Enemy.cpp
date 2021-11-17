@@ -15,7 +15,7 @@ void Enemy::updatePosition(StaticSprite* platforms, sf::Vector2f player_pos)
 	const float horiz_vel = player_pos.x > pos.x ? speed : -speed;
 	update(horiz_vel);
 
-	for (unsigned int i = 0; i < 2; i++)
+	for (unsigned int i = 0; i < 3; i++)
 	{
 		if (overlaps(platforms[i]))
 		{

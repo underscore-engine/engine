@@ -15,9 +15,10 @@ int main()
 
 	Player player(sf::Vector2f(500.f, 0.f), sf::Vector2f(215.f, 258.f));
 
-	StaticSprite platforms[2] = {
+	StaticSprite platforms[3] = {
 		StaticSprite("assets/platform.png", sf::Vector2f(10.f, 500.f), sf::Vector2f(760.f, 107.f)),
-		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 720.f), sf::Vector2f(760.f, 107.f))
+		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 720.f), sf::Vector2f(760.f, 107.f)),
+		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 100.f), sf::Vector2f(760.f, 107.f))
 	};
 
 	Enemy enemies[2] = {
@@ -64,18 +65,21 @@ int main()
 
 		window.clear();
 
-		for (int i = 0; i < 2; i++)
+		for (unsigned int i = 0; i < 2; i++)
 		{
 			enemies[i].updatePosition(platforms, player.pos);
-
-			platforms[i].draw(window);
 			enemies[i].draw(window);
 
 			if (show_hitboxes)
-			{
-				window.draw(platforms[i].get_hitbox_outline());
 				window.draw(enemies[i].get_hitbox_outline());
-			}
+		}
+
+		for (unsigned int i = 0; i < 3; i++)
+		{
+			platforms[i].draw(window);
+
+			if (show_hitboxes)
+				window.draw(platforms[i].get_hitbox_outline());
 		}
 
 		player.draw(window);
