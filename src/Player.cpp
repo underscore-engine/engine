@@ -2,13 +2,14 @@
 
 unsigned int Player::maxJumps { 1 };
 
-Player::Player(sf::Vector2f _pos, sf::Vector2f _size) :
-	Hitbox { _pos, _size }
+Player::Player(sf::Vector2f _pos, sf::Vector2f target_size) :
+	Hitbox { _pos, target_size },
+	Sprite { "assets/main_character.png", _pos, target_size }
 {
-	// Load Texture
-	texture.loadFromFile("assets/main_character.png");
-	sprite.setTexture(texture);
-	size = sf::Vector2f(texture.getSize());
+	// // Load Texture
+	// texture.loadFromFile("assets/main_character.png");
+	// sprite.setTexture(texture);
+	// size = sf::Vector2f(texture.getSize());
 
 	// Initialise Held Keys Map
 	held_keys[sf::Keyboard::W] = 0;
@@ -18,9 +19,9 @@ Player::Player(sf::Vector2f _pos, sf::Vector2f _size) :
 	held_keys[sf::Keyboard::Space] = 0;
 
 	// Initialise Position
-	pos = _pos;
+	// pos = _pos;
 	speed = 3.f;
-	sprite.setPosition(pos);
+	// sprite.setPosition(pos);
 }
 
 void Player::handleKeyPress(sf::Keyboard::Key key)

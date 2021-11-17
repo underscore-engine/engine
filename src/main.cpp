@@ -13,11 +13,11 @@ int main()
 
 	bool show_hitboxes = false;
 
-	Player player(sf::Vector2f(500.f, 0.f), sf::Vector2f());
+	Player player(sf::Vector2f(500.f, 0.f), sf::Vector2f(215.f, 258.f));
 
 	StaticSprite platforms[2] = {
-		StaticSprite("assets/platform.png", sf::Vector2f(10.f, 500.f)),
-		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 720.f))
+		StaticSprite("assets/platform.png", sf::Vector2f(10.f, 500.f), sf::Vector2f(760.f, 107.f)),
+		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 720.f), sf::Vector2f(760.f, 107.f))
 	};
 
 	Enemy enemies[2] = {
@@ -68,10 +68,8 @@ int main()
 		{
 			enemies[i].updatePosition(platforms, player.pos);
 
-			window.draw(platforms[i].sprite);
-
+			platforms[i].draw(window);
 			enemies[i].draw(window);
-			window.draw(enemies[i].sprite);
 
 			if (show_hitboxes)
 			{
@@ -80,7 +78,8 @@ int main()
 			}
 		}
 
-		window.draw(player.sprite);
+		player.draw(window);
+
 		if (show_hitboxes)
 			window.draw(player.get_hitbox_outline());
 

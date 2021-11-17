@@ -2,6 +2,7 @@
 #define Player_H
 
 #include "Hitbox.hpp"
+#include "Sprite.hpp"
 #include "StaticSprite.hpp"
 
 /**
@@ -10,10 +11,9 @@
  * @param pos The initial position of the top left of the player
  * @param size The width and height of the player's hitbox
  */
-class Player : public Hitbox
+class Player : public Hitbox, public Sprite
 {
 private:
-	sf::Texture texture;
 	float speed;
 	// A map of keys that are 1 if held but 0 if not
 	std::unordered_map<sf::Keyboard::Key, bool> held_keys;
@@ -28,7 +28,6 @@ private:
 	bool isGrounded;
 
 public:
-	sf::Sprite sprite;
 	Player(sf::Vector2f pos, sf::Vector2f size);
 	// Handles a key press event from the keyboard
 	void handleKeyPress(sf::Keyboard::Key key);
