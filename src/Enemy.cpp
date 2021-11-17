@@ -1,17 +1,10 @@
 #include "Enemy.hpp"
+#include "Sprite.hpp"
 
-Enemy::Enemy(sf::Vector2f _pos, sf::Vector2f _size) :
-	Hitbox { _pos, _size }
+Enemy::Enemy(sf::Vector2f _pos, sf::Vector2f target_size) :
+	Hitbox { _pos, target_size },
+	Sprite { "assets/enemy.png", _pos, target_size }
 {
-	// Load Texture
-	texture.loadFromFile("assets/enemy.png");
-	sprite.setTexture(texture);
-	size = sf::Vector2f(texture.getSize());
-
-	// Initialise Position
-	pos = _pos;
-
-	sprite.setPosition(pos);
 }
 
 void Enemy::updatePosition(StaticSprite* platforms, sf::Vector2f player_pos)

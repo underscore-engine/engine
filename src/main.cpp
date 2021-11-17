@@ -21,8 +21,8 @@ int main()
 	};
 
 	Enemy enemies[2] = {
-		Enemy(sf::Vector2f(0.f, 210.f), sf::Vector2f()),
-		Enemy(sf::Vector2f(1800.f, 320.f), sf::Vector2f())
+		Enemy(sf::Vector2f(0.f, 210.f), sf::Vector2f(215.f, 258.f)),
+		Enemy(sf::Vector2f(1800.f, 320.f), sf::Vector2f(215.f, 258.f))
 	};
 
 	FrameRateTracker frame_tracker;
@@ -69,6 +69,8 @@ int main()
 			enemies[i].updatePosition(platforms, player.pos);
 
 			window.draw(platforms[i].sprite);
+
+			enemies[i].draw(window);
 			window.draw(enemies[i].sprite);
 
 			if (show_hitboxes)
