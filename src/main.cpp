@@ -59,8 +59,8 @@ int main()
 
 	StaticSprite platforms[3] = {
 		StaticSprite("assets/platform.png", sf::Vector2f(10.f, 500.f)),
-		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 720.f)),
-		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 100.f))
+		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 100.f)),
+		StaticSprite("assets/platform.png", sf::Vector2f(2100.f, 500.f))
 	};
 
 	Enemy enemies[2] = {
@@ -74,8 +74,9 @@ int main()
 	while (window.isOpen())
 	{
 		deltatime = deltatime_clock.restart().asSeconds() * 450.f;
-		// we keep our view centered on the player
-		player_view.setCenter(player.pos);
+
+		// Center the camera on the player
+		player_view.setCenter(sf::Vector2f(player.pos.x, 200));
 		window.setView(player_view);
 
 		while (window.pollEvent(event))
