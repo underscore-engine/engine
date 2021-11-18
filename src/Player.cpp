@@ -1,4 +1,5 @@
 #include "Player.hpp"
+#include <string>
 
 unsigned int Player::maxJumps { 1 };
 
@@ -20,6 +21,7 @@ Player::Player(sf::Vector2f _pos, sf::Vector2f _size) :
 	// Initialise Position
 	pos = _pos;
 	speed = 3.f;
+	health = 100;
 	sprite.setPosition(pos);
 }
 
@@ -69,4 +71,35 @@ void Player::updatePosition(StaticSprite* platforms)
 	}
 
 	sprite.setPosition(pos);
+}
+
+sf::Vector2f Player::getPosition()
+{
+	return pos;
+}
+
+void Player::handleCollide(Enemy enemy)
+{
+	float overlap_damage = 0.05;
+
+	if (overlaps(enemy))
+	{
+		health -= overlap_damage;
+	}
+}
+
+void Player::updateHealth()
+{
+	font.loadFromFile("assets/opensans.ttf");
+	std::string health_text = std::to_string(static_cast<int>(health));
+	health_display = sf::Text(health_text, font);
+
+	health_display.setCharacterSize(30);
+	health_display.setFillColor(sf::Color::White);
+	health_display.setPosition(sf::Vector2f(pos.x, pos.y - size.y / 2));
+}
+
+float Player::getHealth()
+{
+	return health;
 }

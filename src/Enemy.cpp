@@ -32,3 +32,8 @@ void Enemy::updatePosition(StaticSprite* platforms, sf::Vector2f player_pos)
 
 	sprite.setPosition(pos);
 }
+
+sf::Vector2f Enemy::getPosition()
+{
+	return pos;
+}

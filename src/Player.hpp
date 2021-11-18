@@ -1,6 +1,7 @@
 #ifndef Player_H
 #define Player_H
 
+#include "Enemy.hpp"
 #include "Hitbox.hpp"
 #include "StaticSprite.hpp"
 
@@ -26,6 +27,10 @@ private:
 
 	// Whether the object was pushed up on the previous frame
 	bool isGrounded;
+	float health;
+
+	sf::Font font;
+	int elapsed_iterations;
 
 public:
 	sf::Sprite sprite;
@@ -39,7 +44,12 @@ public:
 	// Updates the position of the sprite
 	void updatePosition(StaticSprite* platforms);
 	// Handled when space is pressed
+	sf::Vector2f getPosition();
 	void handleJump();
+	void handleCollide(Enemy enemy);
+	sf::Text health_display;
+	void updateHealth();
+	float getHealth();
 };
 
 #endif

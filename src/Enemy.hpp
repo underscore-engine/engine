@@ -21,6 +21,7 @@ public:
 
 	// Updates the position of the sprite
 	void updatePosition(StaticSprite* platforms, sf::Vector2f player_pos);
+	sf::Vector2f getPosition();
 };
 
 #endif
