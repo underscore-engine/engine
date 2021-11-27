@@ -1,17 +1,20 @@
-#define max_number_of_items 3
+#define max_number_of_items 2
+#include "MenuButton.hpp"
 
-class Menu
+class Menu : public MenuButton
 {
 private:
 	sf::Font font;
-	sf::Text menu[max_number_of_items];
+	MenuButton menuItems[max_number_of_items];
 	bool selection[max_number_of_items];
+	float width;
+	float height;
+	float screen_width;
+	float screen_height;
 
 public:
-	Menu(float width, float height);
-	~Menu();
-
-	void draw(sf::RenderWindow& window);
-	void handleButtonPress(sf::Vector2i position_of_mouse);
+	Menu(float current_width, float current_height);
+	void draw(sf::RenderWindow& window, float new_width, float new_height);
+	void handleButtonPress(float pos_mouse_x, float pos_mouse_y);
 	bool getSelection(int choice);
 };

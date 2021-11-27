@@ -4,6 +4,8 @@
 #include "Player.hpp"
 #include "StaticSprite.hpp"
 
+#include "MenuButton.hpp"
+
 float deltatime = 0.f;
 
 int main()
@@ -19,7 +21,6 @@ int main()
 
 	sf::Event event;
 
-	/*
 	//menu loop
 	while (window.isOpen())
 	{
@@ -32,7 +33,7 @@ int main()
 					window.close();
 					break;
 				case sf::Event::MouseButtonPressed:
-					menu.handleButtonPress(sf::Mouse::getPosition());
+					menu.handleButtonPress(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 					break;
 				default:
 					break;
@@ -43,17 +44,16 @@ int main()
 		{
 			break;
 		}
-		else if (menu.getSelection(2))
+		else if (menu.getSelection(1))
 		{
 			window.close();
 		}
 
 		window.clear();
+		menu.draw(window, window.getSize().x, window.getSize().y);
 
-		menu.draw(window);
 		window.display();
 	}
-	*/
 
 	bool show_hitboxes = false;
 

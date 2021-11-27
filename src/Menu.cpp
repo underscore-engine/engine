@@ -1,61 +1,56 @@
 #include "Menu.hpp"
 
-Menu::Menu(float width, float height)
+Menu::Menu(float current_width, float current_height) :
+	MenuButton {}
 {
-	//creates menu options
+	width = current_width;
+	height = current_height;
 
-	font.loadFromFile("assets/opensans.ttf");
+	//creates menu options
+	for (int i = 0; i < max_number_of_items; i++)
+	{
+		menuItems[i] = MenuButton();
+		selection[i] = false;
+	}
+}
+
+void Menu::draw(sf::RenderWindow& window, float new_width, float new_height)
+{
+	//draws the menu options
+	sf::Texture texture;
 
 	for (int i = 0; i < max_number_of_items; i++)
 	{
-		menu[i] = sf::Text("0 fps", font);
-		menu[i].setCharacterSize(100);
-		menu[i].setFillColor(sf::Color::Red);
-
 		switch (i)
 		{
 			case 0:
-				menu[i].setString("Play");
-				break;
-			case 1:
-				menu[i].setString("Options");
+				texture.loadFromFile("assets/play.png");
 				break;
 			default:
-				menu[i].setString("Exit");
+				texture.loadFromFile("assets/QuitButton.png");
 		}
 
-		selection[i] = false;
+		menuItems[i].width = texture.getSize().x * menuItems[i].scale;
+		menuItems[i].height = texture.getSize().y * menuItems[i].scale;
 
-		float text_width = menu[i].getLocalBounds().width;
+		menuItems[i].setPosition((width / 2 - menuItems[i].width / 2), (height / (max_number_of_items + 1) * (i + 1)), new_width / width, new_height / height);
+		menuItems[i].sprite.setTexture(texture);
 
-		menu[i].setPosition(sf::Vector2f((width / 2) - (text_width / 2), height / (max_number_of_items + 1) * (i + 1)));
+		window.draw(menuItems[i].sprite);
 	}
 }
 
-Menu::~Menu()
-{
-}
-
-void Menu::draw(sf::RenderWindow& window)
-{
-	//draws the menu options
-	for (int i = 0; i < max_number_of_items; i++)
-	{
-		window.draw(menu[i]);
-	}
-}
-
-void Menu::handleButtonPress(sf::Vector2i position_of_mouse)
+void Menu::handleButtonPress(float pos_mouse_x, float pos_mouse_y)
 {
 	//find where the mouse is clicking
-	//this needs to be made dynamic as it only works with the exact window size
+
 	for (int i = 0; i < max_number_of_items; i++)
 	{
-		if ((position_of_mouse.x > menu[i].getPosition().x + 550) and position_of_mouse.x < menu[i].getPosition().x + 550 + menu[i].getLocalBounds().width)
+
+		if ((pos_mouse_x > menuItems[i].position.x) and (pos_mouse_x < menuItems[i].position.x + menuItems[i].width * menuItems[i].window_scale_x))
 		{
-			if ((position_of_mouse.y > menu[i].getPosition().y + 550) and (position_of_mouse.y < menu[i].getPosition().y + 550 + menu[i].getLocalBounds().height))
+			if ((pos_mouse_y > menuItems[i].position.y) and (pos_mouse_y < menuItems[i].position.y + menuItems[i].height * menuItems[i].window_scale_y))
 			{
-				menu[i].setFillColor(sf::Color::White);
 				selection[i] = true;
 			}
 		}
