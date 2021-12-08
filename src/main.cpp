@@ -3,6 +3,7 @@
 #include "Menu.hpp"
 #include "Player.hpp"
 #include "StaticSprite.hpp"
+#include "WindowStates/MenuState.hpp"
 
 float deltatime = 0.f;
 
@@ -15,42 +16,18 @@ int main()
 	// Setup our view (camera)
 	sf::View player_view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
 
-	Menu menu(window.getSize().x, window.getSize().y);
+	MenuState current_state(window);
 
 	sf::Event event;
 	//menu loop
 	while (window.isOpen())
 	{
-		//waits for player to make a choice
-
 		while (window.pollEvent(event))
-		{
-			switch (event.type)
-			{
-				case sf::Event::Closed:
-					window.close();
-					break;
-				case sf::Event::MouseButtonPressed:
-					menu.handleButtonPress(sf::Mouse::getPosition());
-					break;
-				default:
-					break;
-			}
-		}
+			current_state.handle_event(event);
 
-		if (menu.getSelection(0))
-		{
-			break;
-		}
-		else if (menu.getSelection(2))
-		{
-			window.close();
-		}
+		current_state.update();
 
-		window.clear();
-
-		menu.draw(window);
-		window.display();
+		current_state.show();
 	}
 
 	bool show_hitboxes = false;
