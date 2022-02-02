@@ -5,6 +5,8 @@
 #include "Sprite.hpp"
 #include "StaticSprite.hpp"
 
+#include <unordered_map>
+
 /**
  * The main player class that the user controls
  *

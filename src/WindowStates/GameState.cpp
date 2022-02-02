@@ -7,7 +7,7 @@ GameState::GameState(sf::RenderWindow& window) :
 
 void GameState::handle_event(sf::Event& event)
 {
-	std::cout << event.key << std::endl;
+	std::cout << event.key.code << std::endl;
 }
 
 void GameState::update()

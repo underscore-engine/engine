@@ -1,9 +1,9 @@
 #include "MenuState.hpp"
 
 MenuState::MenuState(sf::RenderWindow& window) :
-	BaseState { window }
+	BaseState { window },
+	menu(window.getSize().x, window.getSize().y)
 {
-	Menu menu(window.getSize().x, window.getSize().y);
 }
 
 void MenuState::handle_event(sf::Event& event)

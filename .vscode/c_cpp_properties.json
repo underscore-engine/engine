@@ -29,8 +29,7 @@
 			],
 			"includePath": [
 				"${workspaceFolder}/src",
-				"${workspaceFolder}/lib",
-				"/usr/local/include/**"
+				"${workspaceFolder}/lib"
 			],
 			"defines": [
 				"_DEBUG"

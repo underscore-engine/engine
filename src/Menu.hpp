@@ -1,3 +1,6 @@
+#ifndef Menu_H
+#define Menu_H
+
 #define max_number_of_items 3
 
 class Menu
@@ -9,9 +12,10 @@ private:
 
 public:
 	Menu(float width, float height);
-	~Menu();
 
 	void draw(sf::RenderWindow& window);
 	void handleButtonPress(sf::Vector2i position_of_mouse);
 	bool getSelection(int choice);
 };
+
+#endif
