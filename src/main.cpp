@@ -21,6 +21,12 @@ int main()
 
 	sf::Event event;
 
+	sf::Texture bgTexture;
+	bgTexture.loadFromFile("assets/underscore_bg.png");
+	sf::Sprite bgSprite;
+
+	bgSprite.setTexture(bgTexture);
+
 	//menu loop
 	while (window.isOpen())
 	{
@@ -115,6 +121,12 @@ int main()
 		player.updatePosition(platforms);
 
 		window.clear();
+
+		// Render the background
+
+		window.draw(bgSprite);
+		bgSprite.setPosition(-400, -400);
+		bgSprite.setScale(6, 6);
 
 		// Render the platforms
 		for (int i = 0; i < 3; i++)
