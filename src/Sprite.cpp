@@ -17,3 +17,10 @@ void Sprite::draw(sf::RenderWindow& window)
 {
 	window.draw(sprite);
 }
+
+void Sprite::update_sprite(sf::Vector2f pos, sf::Vector2f target_size)
+{
+	const sf::FloatRect bounds = sprite.getLocalBounds();
+	sprite.setScale(target_size.x / bounds.width, target_size.y / bounds.height);
+	sprite.setPosition(pos);
+}
