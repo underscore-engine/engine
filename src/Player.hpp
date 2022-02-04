@@ -31,6 +31,7 @@ private:
 
 public:
 	Player(sf::Vector2f pos, sf::Vector2f size);
+	Player();
 	// Handles a key press event from the keyboard
 	void handleKeyPress(sf::Keyboard::Key key);
 	// Handles a key release event from the keyboard
@@ -41,6 +42,8 @@ public:
 	void updatePosition(StaticSprite* platforms);
 	// Handled when space is pressed
 	void handleJump();
+
+	void setDetails(sf::Vector2f pos, sf::Vector2f _size);
 };
 
 #endif

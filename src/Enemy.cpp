@@ -4,8 +4,12 @@
 Enemy::Enemy(sf::Vector2f _pos, sf::Vector2f target_size) :
 	Hitbox { _pos, target_size },
 	Sprite { "assets/enemy.png", _pos, target_size }
-{
-}
+{}
+
+Enemy::Enemy() :
+	Hitbox { sf::Vector2f(), sf::Vector2f() },
+	Sprite { "assets/enemy.png", sf::Vector2f(), sf::Vector2f() }
+{}
 
 void Enemy::updatePosition(StaticSprite* platforms, sf::Vector2f player_pos)
 {
@@ -22,4 +26,10 @@ void Enemy::updatePosition(StaticSprite* platforms, sf::Vector2f player_pos)
 	}
 
 	sprite.setPosition(pos);
+}
+
+void Enemy::setPosition(sf::Vector2f _pos)
+{
+	pos = _pos;
+	update_sprite(pos, size);
 }

@@ -71,3 +71,9 @@ void Player::updatePosition(StaticSprite* platforms)
 
 	sprite.setPosition(pos);
 }
+
+void Player::setDetails(sf::Vector2f _pos, sf::Vector2f _size)
+{
+	pos = _pos;
+	update_sprite(pos, _size);
+}

@@ -10,9 +10,6 @@ void MenuState::handle_event(sf::Event& event)
 {
 	switch (event.type)
 	{
-		case sf::Event::Closed:
-			window.close();
-			break;
 		case sf::Event::MouseButtonPressed:
 			menu.handleButtonPress(sf::Mouse::getPosition(window));
 			break;
@@ -21,12 +18,12 @@ void MenuState::handle_event(sf::Event& event)
 	}
 }
 
-void MenuState::update()
+void MenuState::update(WindowStates& next_state)
 {
 	switch (menu.hasButtonBeenPressed())
 	{
 		case 0:
-			std::cout << "Play the game" << std::endl;
+			next_state = WindowStates::GAME;
 			break;
 		case 1:
 			std::cout << "Go to options page" << std::endl;
@@ -41,7 +38,5 @@ void MenuState::update()
 
 void MenuState::show()
 {
-	window.clear();
 	menu.draw(window);
-	window.display();
 }

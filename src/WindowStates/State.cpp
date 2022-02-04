@@ -2,11 +2,12 @@
 
 void BaseState::handle_event(sf::Event& event)
 {
-	std::cout << event.key.code << std::endl;
+	(void)event;
 }
 
-void BaseState::update()
+void BaseState::update(WindowStates& next_state)
 {
+	(void)next_state;
 }
 
 void BaseState::show()

@@ -13,7 +13,7 @@ public:
 	MenuState(sf::RenderWindow& window);
 
 	void handle_event(sf::Event& event);
-	void update();
+	void update(WindowStates& next_state);
 	void show();
 };
 
