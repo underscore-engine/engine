@@ -1,8 +1,8 @@
 #include "Enemy.hpp"
 #include "FrameRate.hpp"
-#include "Menu.hpp"
 #include "Player.hpp"
 #include "StaticSprite.hpp"
+#include "WindowStates/GameState.hpp"
 #include "WindowStates/MenuState.hpp"
 
 float deltatime = 0.f;
@@ -16,18 +16,21 @@ int main()
 	// Setup our view (camera)
 	sf::View player_view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
 
-	MenuState current_state(window);
+	MenuState menu_state(window);
+	GameState game_state(window);
+
+	// BaseState* current_state = &menu_state;
+	MenuState* current_state = &menu_state;
 
 	sf::Event event;
-	//menu loop
+	// menu loop
 	while (window.isOpen())
 	{
 		while (window.pollEvent(event))
-			current_state.handle_event(event);
+			current_state->handle_event(event);
 
-		current_state.update();
-
-		current_state.show();
+		current_state->update();
+		current_state->show();
 	}
 
 	bool show_hitboxes = false;

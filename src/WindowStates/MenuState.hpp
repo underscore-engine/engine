@@ -1,7 +1,7 @@
 #ifndef MenuState_H
 #define MenuState_H
 
-#include "Menu.hpp"
+#include "Menu/Menu.hpp"
 #include "State.hpp"
 
 class MenuState : BaseState

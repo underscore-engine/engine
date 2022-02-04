@@ -2,7 +2,7 @@
 
 MenuState::MenuState(sf::RenderWindow& window) :
 	BaseState { window },
-	menu(window.getSize().x, window.getSize().y)
+	menu(sf::Vector2u(window.getSize().x, window.getSize().y))
 {
 }
 
@@ -14,7 +14,7 @@ void MenuState::handle_event(sf::Event& event)
 			window.close();
 			break;
 		case sf::Event::MouseButtonPressed:
-			menu.handleButtonPress(sf::Mouse::getPosition());
+			menu.handleButtonPress(sf::Mouse::getPosition(window));
 			break;
 		default:
 			break;
@@ -23,20 +23,25 @@ void MenuState::handle_event(sf::Event& event)
 
 void MenuState::update()
 {
-	if (menu.getSelection(0))
+	switch (menu.hasButtonBeenPressed())
 	{
-		std::cout << "Leave menu" << std::endl;
-	}
-	else if (menu.getSelection(2))
-	{
-		window.close();
+		case 0:
+			std::cout << "Play the game" << std::endl;
+			break;
+		case 1:
+			std::cout << "Go to options page" << std::endl;
+			break;
+		case 2:
+			window.close();
+			break;
+		default:
+			break;
 	}
 }
 
 void MenuState::show()
 {
 	window.clear();
-
 	menu.draw(window);
 	window.display();
 }
