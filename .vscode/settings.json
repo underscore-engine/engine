@@ -106,7 +106,8 @@
 		"complex": "cpp",
 		"ios": "cpp",
 		"locale": "cpp",
-		"stack": "cpp"
+		"stack": "cpp",
+		"__availability": "cpp"
 	},
 	"terminal.integrated.env.windows": {
 		"Path": "C:/mingw32/bin;C:/SFML-2.5.1/bin"

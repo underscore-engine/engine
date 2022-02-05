@@ -43,6 +43,7 @@ int main()
 	WindowStates current_state = WindowStates::MENU;
 	while (window.isOpen())
 	{
+		window.setView(window.getDefaultView());
 		switch (current_state)
 		{
 			case WindowStates::GAME:

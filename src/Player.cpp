@@ -1,4 +1,5 @@
 #include "Player.hpp"
+#include <string>
 
 unsigned int Player::maxJumps { 1 };
 
@@ -6,11 +7,6 @@ Player::Player(sf::Vector2f _pos, sf::Vector2f target_size) :
 	Hitbox { _pos, target_size },
 	Sprite { "assets/main_character.png", _pos, target_size }
 {
-	// // Load Texture
-	// texture.loadFromFile("assets/main_character.png");
-	// sprite.setTexture(texture);
-	// size = sf::Vector2f(texture.getSize());
-
 	// Initialise Held Keys Map
 	held_keys[sf::Keyboard::W] = 0;
 	held_keys[sf::Keyboard::A] = 0;
@@ -18,10 +14,8 @@ Player::Player(sf::Vector2f _pos, sf::Vector2f target_size) :
 	held_keys[sf::Keyboard::D] = 0;
 	held_keys[sf::Keyboard::Space] = 0;
 
-	// Initialise Position
-	// pos = _pos;
 	speed = 3.f;
-	// sprite.setPosition(pos);
+	health = 100;
 }
 
 void Player::handleKeyPress(sf::Keyboard::Key key)
@@ -76,4 +70,25 @@ void Player::setDetails(sf::Vector2f _pos, sf::Vector2f _size)
 {
 	pos = _pos;
 	update_sprite(pos, _size);
+}
+
+void Player::handleCollide(Enemy enemy)
+{
+	float overlap_damage = 0.05;
+
+	if (overlaps(enemy))
+	{
+		health -= overlap_damage;
+	}
+}
+
+void Player::updateHealth()
+{
+	font.loadFromFile("assets/opensans.ttf");
+	std::string health_text = std::to_string(static_cast<int>(health));
+	health_display = sf::Text(health_text, font);
+
+	health_display.setCharacterSize(30);
+	health_display.setFillColor(sf::Color::White);
+	health_display.setPosition(sf::Vector2f(pos.x, pos.y - size.y / 2));
 }

@@ -4,12 +4,12 @@
 #include "Enemy.hpp"
 #include "FrameRate.hpp"
 #include "Player.hpp"
+#include "WindowStates/State.hpp"
 
 class Game
 {
 private:
 	sf::RenderWindow& window;
-	sf::View player_view;
 
 	FrameRateTracker frame_tracker;
 
@@ -18,6 +18,7 @@ private:
 	Enemy enemies[2];
 
 public:
+	sf::View player_view;
 	bool show_hitboxes;
 
 	Game(sf::RenderWindow& window);
@@ -30,7 +31,7 @@ public:
 	void moveViewToPlayer();
 	void draw();
 
-	void update();
+	void update(WindowStates& next_state);
 };
 
 #endif

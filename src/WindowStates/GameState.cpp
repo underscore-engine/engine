@@ -2,6 +2,7 @@
 
 GameState::GameState(sf::RenderWindow& window) :
 	BaseState { window },
+	background_sprite { window },
 	game(window)
 {}
 
@@ -33,12 +34,12 @@ void GameState::handle_event(sf::Event& event)
 
 void GameState::update(WindowStates& next_state)
 {
-	game.update();
-	(void)next_state;
+	game.update(next_state);
 }
 
 void GameState::show()
 {
+	background_sprite.draw(window, game.player_view);
 	game.moveViewToPlayer();
 	game.draw();
 }

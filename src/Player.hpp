@@ -1,6 +1,7 @@
 #ifndef Player_H
 #define Player_H
 
+#include "Enemy.hpp"
 #include "Hitbox.hpp"
 #include "Sprite.hpp"
 #include "StaticSprite.hpp"
@@ -29,7 +30,12 @@ private:
 	// Whether the object was pushed up on the previous frame
 	bool isGrounded;
 
+	sf::Font font;
+	int elapsed_iterations;
+
 public:
+	float health;
+
 	Player(sf::Vector2f pos, sf::Vector2f size);
 	Player();
 	// Handles a key press event from the keyboard
@@ -44,6 +50,9 @@ public:
 	void handleJump();
 
 	void setDetails(sf::Vector2f pos, sf::Vector2f _size);
+	void handleCollide(Enemy enemy);
+	sf::Text health_display;
+	void updateHealth();
 };
 
 #endif

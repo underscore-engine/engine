@@ -1,12 +1,14 @@
 #ifndef GameState_H
 #define GameState_H
 
+#include "Game/Background.hpp"
 #include "Game/Game.hpp"
 #include "State.hpp"
 
 class GameState : BaseState
 {
 private:
+	Background background_sprite;
 	Game game;
 
 public:
