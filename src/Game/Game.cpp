@@ -1,6 +1,9 @@
 #include "Game/Game.hpp"
 #include "WindowStates/State.hpp"
 
+/**
+ * Initialise all objects and classes inside the game
+ */
 Game::Game(sf::RenderWindow& _window) :
 	window { _window },
 	player { sf::Vector2f(500.f, 0.f), sf::Vector2f(215.f, 258.f) },
@@ -18,6 +21,11 @@ Game::Game(sf::RenderWindow& _window) :
 	reset_positions(true);
 }
 
+/**
+ * Resets the positions of the player (and possibly enemies)
+ *
+ * @param hard_reset Whether to reset enemies as well
+ */
 void Game::reset_positions(bool hard_reset)
 {
 	player.setDetails(sf::Vector2f(500.f, 0.f), player.size);
@@ -42,6 +50,7 @@ void Game::update(WindowStates& next_state)
 {
 	if (player.health < 0)
 	{
+		// If the player has died, go to Menu screen (TODO: implement GameOver screen)
 		next_state = WindowStates::MENU;
 		return;
 	}
@@ -56,6 +65,7 @@ void Game::update(WindowStates& next_state)
 
 	player.updateHealth();
 
+	// Update information in frame_tracker text widget
 	frame_tracker.add_info("Vel", std::to_string(player.vel.x).substr(0, 4) + "  |  " + std::to_string(player.vel.y).substr(0, 4));
 	frame_tracker.update();
 }

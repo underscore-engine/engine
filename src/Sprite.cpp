@@ -18,6 +18,13 @@ void Sprite::draw(sf::RenderWindow& window)
 	window.draw(sprite);
 }
 
+/**
+ * Use this function when you want to chage the position or size in order to
+ * accurately update sprite.
+ *
+ * @param pos The new position of the sprite
+ * @param target_size The new size to scale the sprite to
+ */
 void Sprite::update_sprite(sf::Vector2f pos, sf::Vector2f target_size)
 {
 	const sf::FloatRect bounds = sprite.getLocalBounds();

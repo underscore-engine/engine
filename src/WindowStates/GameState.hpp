@@ -5,6 +5,11 @@
 #include "Game/Game.hpp"
 #include "State.hpp"
 
+/**
+ * This is the state contains the main gameplay
+ *
+ * @param window A reference to the main window object
+ */
 class GameState : BaseState
 {
 private:

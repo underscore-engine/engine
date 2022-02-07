@@ -23,6 +23,14 @@ MenuButton::MenuButton() :
 	text_sprite.setFillColor(sf::Color::Black);
 }
 
+/**
+ * Takes in the parameters for the button and applies them.
+ * Automatically positions text in center of button.
+ *
+ * @param _text The text inside the button
+ * @param _pos The position of the top left coordinate of the button sprite
+ * @param _size The size of the button sprite
+ */
 void MenuButton::set_details(std::string _text, sf::Vector2f _pos, sf::Vector2f _size)
 {
 	text = _text;
@@ -45,6 +53,11 @@ void MenuButton::draw(sf::RenderWindow& window)
 	window.draw(text_sprite);
 }
 
+/**
+ * If the click occured inside the button, record it and return it when asked
+ *
+ * @param position_of_mouse The vector for mouse position
+ */
 void MenuButton::handleButtonPress(sf::Vector2i position_of_mouse)
 {
 	has_been_selected = true;
@@ -60,6 +73,14 @@ void MenuButton::handleButtonPress(sf::Vector2i position_of_mouse)
 	}
 }
 
+/**
+ * All buttons will be asked whether they were clicked at the same time.
+ * Therefore this will return whether it was clicked during any of the events.
+ * If it was clicked, then it will reset its attribute (to prevent multiple perceived mouse clicks)
+ * and return true. Else it will return false.
+ *
+ * @return bool Whether the button has been clicked
+ */
 bool MenuButton::hasBeenPressed()
 {
 	if (has_been_selected)

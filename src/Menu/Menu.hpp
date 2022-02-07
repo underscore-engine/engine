@@ -3,6 +3,12 @@
 
 #include "Menu/Button.hpp"
 
+/**
+ * This handle the main functionality of the Menu by containing each of the buttons
+ * and collating the information for each of them.
+ *
+ * @param screen_size This is the vector containing the size in pixels of the screen
+ */
 class Menu
 {
 private:

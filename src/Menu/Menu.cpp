@@ -1,5 +1,8 @@
 #include "Menu/Menu.hpp"
 
+/**
+ * This initialises the class and fills in the button information
+ */
 Menu::Menu(sf::Vector2u screen_size)
 {
 	const sf::Vector2f button_size = sf::Vector2f(600, 299);
@@ -16,12 +19,21 @@ void Menu::draw(sf::RenderWindow& window)
 		buttons[i].draw(window);
 }
 
+/**
+ * For each mouse click tell all buttons to check if they were clicked.
+ * If so then they will remember that they have been clicked.
+ */
 void Menu::handleButtonPress(sf::Vector2i position_of_mouse)
 {
 	for (int i = 0; i < 3; i++)
 		buttons[i].handleButtonPress(position_of_mouse);
 }
 
+/**
+ * Returns the index of the button that has been clicked, -1 if none were clicked
+ *
+ * @return int The index of the clicked button
+ */
 int Menu::hasButtonBeenPressed()
 {
 	for (int i = 0; i < 3; i++)

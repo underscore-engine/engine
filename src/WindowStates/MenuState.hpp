@@ -4,6 +4,12 @@
 #include "Menu/Menu.hpp"
 #include "State.hpp"
 
+/**
+ * The default state for the program which shows a menu with a few options.
+ * Primarily there is a button to go to the main game.
+ *
+ * @param window A reference to the main window object
+ */
 class MenuState : BaseState
 {
 protected:

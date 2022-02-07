@@ -4,6 +4,13 @@ Background::Background(sf::RenderWindow& window) :
 	Sprite { "assets/background-image.png", sf::Vector2f(0, 0), sf::Vector2f(window.getSize()) }
 {}
 
+/**
+ * Calculates where to place the background based on the player view,
+ * and draws it behind all other sprites.
+ *
+ * @param window A reference to the main window object
+ * @param view A reference to the currently active player view
+ */
 void Background::draw(sf::RenderWindow& window, sf::View& view)
 {
 	const sf::Vector2f view_center = view.getCenter();

@@ -1,6 +1,11 @@
 #ifndef BaseState_H
 #define BaseState_H
 
+/**
+ * This is dictates all options for the WindowState FSM.
+ * The NONE option means that the current state should remain the same,
+ * while other states mean that the gameloop should stop and switch to a different state.
+ */
 enum WindowStates
 {
 	NONE,

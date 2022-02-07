@@ -6,6 +6,12 @@
 #include "Player.hpp"
 #include "WindowStates/State.hpp"
 
+/**
+ * The main game object to control all game functionality.
+ * Keeps references to player, platforms, and enemies, while also running collision logic.
+ *
+ * @param window A reference to the main window object
+ */
 class Game
 {
 private:

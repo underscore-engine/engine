@@ -3,6 +3,15 @@
 
 #include "Sprite.hpp"
 
+/**
+ * This defines a button that does not move, has a background rectangular image,
+ * and contains centred variable text.
+ *
+ * Once clicked the button records it and returns true once asked.
+ *
+ * While the class can be initialised through the constructor, the default constructor
+ * can also be used if calculations are needed. Then just use the `set_details` method.
+ */
 class MenuButton : Sprite
 {
 private:

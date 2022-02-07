@@ -3,8 +3,7 @@
 MenuState::MenuState(sf::RenderWindow& window) :
 	BaseState { window },
 	menu(sf::Vector2u(window.getSize().x, window.getSize().y))
-{
-}
+{}
 
 void MenuState::handle_event(sf::Event& event)
 {
@@ -20,6 +19,7 @@ void MenuState::handle_event(sf::Event& event)
 
 void MenuState::update(WindowStates& next_state)
 {
+	// Check to see if the menu has received any button presses
 	switch (menu.hasButtonBeenPressed())
 	{
 		case 0:
