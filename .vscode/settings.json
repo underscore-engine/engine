@@ -109,6 +109,7 @@
 		"stack": "cpp",
 		"__availability": "cpp"
 	},
+	"terminal.integrated.automationShell.windows": "C:/Program Files/Git/bin/bash.exe",
 	"terminal.integrated.env.windows": {
 		"Path": "C:/mingw32/bin;C:/SFML-2.5.1/bin"
 	},

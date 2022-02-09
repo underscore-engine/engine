@@ -44,7 +44,7 @@ WindowStates MainStateLoop(T current_state, sf::RenderWindow& window)
 		window.display();
 	}
 	return next_state;
-};
+}
 
 int main()
 {
@@ -68,11 +68,12 @@ int main()
 				current_state = MainStateLoop(game_state, window);
 				break;
 
-			default:
-				std::cout << "Error: Window State is not defined - Defaulting to menu" << std::endl;
-
 			case WindowStates::MENU:
 				current_state = MainStateLoop(menu_state, window);
+				break;
+
+			default:
+				std::cout << "Error: Window State is not defined - Defaulting to menu" << std::endl;
 				break;
 		}
 	}

@@ -45,7 +45,7 @@ void MenuButton::set_details(std::string _text, sf::Vector2f _pos, sf::Vector2f 
 		pos.y + size.y / 2 - tsize.height / 2 - 15));
 
 	update_sprite(_pos, _size);
-};
+}
 
 void MenuButton::draw(sf::RenderWindow& window)
 {
