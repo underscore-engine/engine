@@ -25,7 +25,7 @@ private:
 
 public:
 	sf::View player_view;
-	bool show_hitboxes;
+	bool show_hitboxes = false;
 
 	Game(sf::RenderWindow& window);
 
