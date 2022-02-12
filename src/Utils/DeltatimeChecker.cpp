@@ -27,5 +27,5 @@ bool does_deltatime_seem_wrong(float new_deltatime)
 	const float median = history_copy[2];
 
 	// Return whether new value is anomalous
-	return median * 3 < new_deltatime;
+	return median * 30 < new_deltatime;
 }

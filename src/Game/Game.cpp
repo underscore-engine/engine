@@ -13,8 +13,8 @@ Game::Game(sf::RenderWindow& _window) :
 		StaticSprite("assets/platform.png", sf::Vector2f(2100.f, 500.f), sf::Vector2f(760.f, 107.f))
 	},
 	enemies {
-		Enemy(sf::Vector2f(0.f, 250.f), sf::Vector2f(215.f, 258.f)),
-		Enemy(sf::Vector2f(2700.f, 250.f), sf::Vector2f(215.f, 258.f))
+		Enemy(sf::Vector2f(0.f, -100.f), sf::Vector2f(215.f, 258.f)),
+		Enemy(sf::Vector2f(2700.f, -100.f), sf::Vector2f(215.f, 258.f))
 	},
 	player_view { sf::FloatRect(0, 0, window.getSize().x, window.getSize().y) }
 {
