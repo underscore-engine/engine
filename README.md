@@ -16,4 +16,4 @@ Currently, contributions are not accepted. However, once the core engine is comp
 
 # Future developments
 
-Once the core functionality of the engine is complete, we are planining on implementing extra features such as shaders, sprite creation tools and a GUI for our engine. These are low priority, extension features that are purely conceptual at this stage.
+Once the core functionality of the engine is complete, we are planning on implementing extra features such as shaders, sprite creation tools and a GUI for our engine. These are low priority, extension features that are purely conceptual at this stage.
