@@ -23,16 +23,33 @@ float deltatime = 0.f;
 template <class T>
 WindowStates MainStateLoop(T current_state, sf::RenderWindow& window)
 {
+	/**
+	 * When the screen resizes, it runs the event sf::Event::Resized. However this causes deltatime
+	 * to be much larger than it should be once it has resized, causing entities to clips through others.
+	 * Therefore it records if it is resizing, and if so sets deltatime to 0 for next gameloop iteration.
+	 */
+	bool is_resizing = false;
+
 	sf::Event event;
 	// When next_state is NONE then do not leave current state
 	WindowStates next_state = WindowStates::NONE;
 	while (next_state == WindowStates::NONE && window.isOpen())
 	{
 		deltatime = deltatime_clock.restart().asSeconds() * 450.f;
+		if (is_resizing)
+		{
+			deltatime = 0;
+			is_resizing = false;
+		}
+
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+			else if (event.type == sf::Event::Resized)
+			{
+				is_resizing = true;
+			}
 
 			current_state.handle_event(event);
 		}
