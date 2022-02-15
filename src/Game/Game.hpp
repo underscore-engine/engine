@@ -20,8 +20,8 @@ private:
 	FrameRateTracker frame_tracker;
 
 	Player player;
-	StaticSprite platforms[3];
-	Enemy enemies[2];
+	std::vector<StaticSprite*> platforms;
+	std::vector<Enemy*> enemies;
 
 public:
 	sf::View player_view;

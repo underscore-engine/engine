@@ -11,18 +11,16 @@ Enemy::Enemy() :
 	Sprite { "assets/enemy.png", sf::Vector2f(), sf::Vector2f() }
 {}
 
-void Enemy::updatePosition(StaticSprite* platforms, sf::Vector2f player_pos)
+void Enemy::updatePosition(std::vector<StaticSprite*>& platforms, sf::Vector2f player_pos)
 {
 	float speed = 0.4f;
 	const float horiz_vel = player_pos.x > pos.x ? speed : -speed;
 	update(horiz_vel);
 
-	for (unsigned int i = 0; i < 3; i++)
+	for (StaticSprite* platform : platforms)
 	{
-		if (overlaps(platforms[i]))
-		{
-			correctHitboxOverlap(platforms[i]);
-		}
+		if (overlaps(*platform))
+			correctHitboxOverlap(*platform);
 	}
 
 	sprite.setPosition(pos);

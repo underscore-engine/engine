@@ -45,7 +45,7 @@ public:
 	// Calculates the velocity based on what keys are pressed down
 	float getHorizontalMovement();
 	// Updates the position of the sprite
-	void updatePosition(StaticSprite* platforms);
+	void updatePosition(std::vector<StaticSprite*>& platforms);
 	// Handled when space is pressed
 	void handleJump();
 

@@ -43,18 +43,18 @@ float Player::getHorizontalMovement()
 	return speed * (held_keys.at(sf::Keyboard::D) - held_keys.at(sf::Keyboard::A));
 }
 
-void Player::updatePosition(StaticSprite* platforms)
+void Player::updatePosition(std::vector<StaticSprite*>& platforms)
 {
 	update(getHorizontalMovement());
 
 	isGrounded = false;
 
 	CollisionFix fix;
-	for (unsigned int i = 0; i < 3; i++)
+	for (StaticSprite* platform : platforms)
 	{
-		if (overlaps(platforms[i]))
+		if (overlaps(*platform))
 		{
-			fix = correctHitboxOverlap(platforms[i]);
+			fix = correctHitboxOverlap(*platform);
 			if (fix.h1_direction() == Direction::up)
 			{
 				jumpsLeft = maxJumps;

@@ -21,7 +21,7 @@ public:
 	Enemy();
 
 	// Updates the position of the sprite
-	void updatePosition(StaticSprite* platforms, sf::Vector2f player_pos);
+	void updatePosition(std::vector<StaticSprite*>& platforms, sf::Vector2f player_pos);
 	// Force sets the position of the sprites
 	void setPosition(sf::Vector2f _pos);
 };

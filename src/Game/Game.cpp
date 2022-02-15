@@ -1,5 +1,4 @@
 #include "Game/Game.hpp"
-#include "WindowStates/State.hpp"
 
 /**
  * Initialise all objects and classes inside the game
@@ -8,13 +7,13 @@ Game::Game(sf::RenderWindow& _window) :
 	window { _window },
 	player { sf::Vector2f(500.f, 0.f), sf::Vector2f(215.f, 258.f) },
 	platforms {
-		StaticSprite("assets/platform.png", sf::Vector2f(10.f, 500.f), sf::Vector2f(760.f, 107.f)),
-		StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 100.f), sf::Vector2f(760.f, 107.f)),
-		StaticSprite("assets/platform.png", sf::Vector2f(2100.f, 500.f), sf::Vector2f(760.f, 107.f))
+		new StaticSprite("assets/platform.png", sf::Vector2f(10.f, 500.f), sf::Vector2f(760.f, 107.f)),
+		new StaticSprite("assets/platform.png", sf::Vector2f(1100.f, 100.f), sf::Vector2f(760.f, 107.f)),
+		new StaticSprite("assets/platform.png", sf::Vector2f(2100.f, 500.f), sf::Vector2f(760.f, 107.f))
 	},
 	enemies {
-		Enemy(sf::Vector2f(0.f, -100.f), sf::Vector2f(215.f, 258.f)),
-		Enemy(sf::Vector2f(2700.f, -100.f), sf::Vector2f(215.f, 258.f))
+		new Enemy(sf::Vector2f(0.f, -100.f), sf::Vector2f(215.f, 258.f)),
+		new Enemy(sf::Vector2f(2700.f, -100.f), sf::Vector2f(215.f, 258.f))
 	},
 	player_view { sf::FloatRect(0, 0, window.getSize().x, window.getSize().y) }
 {
@@ -31,8 +30,8 @@ void Game::reset_positions(bool hard_reset)
 	player.setDetails(sf::Vector2f(500.f, 0.f), player.size);
 	if (hard_reset)
 	{
-		enemies[0].setPosition(sf::Vector2f(0.f, 250.f));
-		enemies[1].setPosition(sf::Vector2f(2700.f, 250.f));
+		enemies[0]->setPosition(sf::Vector2f(0.f, 250.f));
+		enemies[1]->setPosition(sf::Vector2f(2700.f, 250.f));
 	}
 }
 
@@ -57,10 +56,10 @@ void Game::update(WindowStates& next_state)
 
 	player.updatePosition(platforms);
 
-	for (unsigned int i = 0; i < 2; i++)
+	for (Enemy* enemy : enemies)
 	{
-		enemies[i].updatePosition(platforms, player.pos);
-		player.handleCollide(enemies[i]);
+		enemy->updatePosition(platforms, player.pos);
+		player.handleCollide(*enemy);
 	}
 
 	player.updateHealth();
@@ -78,21 +77,20 @@ void Game::moveViewToPlayer()
 
 void Game::draw()
 {
-	unsigned int i;
-	for (i = 0; i < 2; i++)
+	for (Enemy* enemy : enemies)
 	{
-		enemies[i].draw(window);
+		enemy->draw(window);
 
 		if (show_hitboxes)
-			window.draw(enemies[i].get_hitbox_outline());
+			window.draw(enemy->get_hitbox_outline());
 	}
 
-	for (i = 0; i < 3; i++)
+	for (StaticSprite* platform : platforms)
 	{
-		platforms[i].draw(window);
+		platform->draw(window);
 
 		if (show_hitboxes)
-			window.draw(platforms[i].get_hitbox_outline());
+			window.draw(platform->get_hitbox_outline());
 	}
 
 	player.draw(window);
