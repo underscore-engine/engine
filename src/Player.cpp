@@ -3,14 +3,10 @@
 
 unsigned int Player::maxJumps { 1 };
 
-Player::Player(sf::Vector2f _pos, sf::Vector2f _size) :
-	Hitbox { _pos, _size }
+Player::Player(sf::Vector2f _pos, sf::Vector2f target_size) :
+	Hitbox { _pos, target_size },
+	Sprite { "assets/main_character.png", _pos, target_size }
 {
-	// Load Texture
-	texture.loadFromFile("assets/main_character.png");
-	sprite.setTexture(texture);
-	size = sf::Vector2f(texture.getSize());
-
 	// Initialise Held Keys Map
 	held_keys[sf::Keyboard::W] = 0;
 	held_keys[sf::Keyboard::A] = 0;
@@ -18,11 +14,8 @@ Player::Player(sf::Vector2f _pos, sf::Vector2f _size) :
 	held_keys[sf::Keyboard::D] = 0;
 	held_keys[sf::Keyboard::Space] = 0;
 
-	// Initialise Position
-	pos = _pos;
 	speed = 3.f;
 	health = 100;
-	sprite.setPosition(pos);
 }
 
 void Player::handleKeyPress(sf::Keyboard::Key key)
@@ -50,18 +43,18 @@ float Player::getHorizontalMovement()
 	return speed * (held_keys.at(sf::Keyboard::D) - held_keys.at(sf::Keyboard::A));
 }
 
-void Player::updatePosition(StaticSprite* platforms)
+void Player::updatePosition(std::vector<StaticSprite*>& platforms)
 {
 	update(getHorizontalMovement());
 
 	isGrounded = false;
 
 	CollisionFix fix;
-	for (unsigned int i = 0; i < 3; i++)
+	for (StaticSprite* platform : platforms)
 	{
-		if (overlaps(platforms[i]))
+		if (overlaps(*platform))
 		{
-			fix = correctHitboxOverlap(platforms[i]);
+			fix = correctHitboxOverlap(*platform);
 			if (fix.h1_direction() == Direction::up)
 			{
 				jumpsLeft = maxJumps;
@@ -73,9 +66,10 @@ void Player::updatePosition(StaticSprite* platforms)
 	sprite.setPosition(pos);
 }
 
-sf::Vector2f Player::getPosition()
+void Player::setDetails(sf::Vector2f _pos, sf::Vector2f _size)
 {
-	return pos;
+	pos = _pos;
+	update_sprite(pos, _size);
 }
 
 void Player::handleCollide(Enemy enemy)
@@ -97,9 +91,4 @@ void Player::updateHealth()
 	health_display.setCharacterSize(30);
 	health_display.setFillColor(sf::Color::White);
 	health_display.setPosition(sf::Vector2f(pos.x, pos.y - size.y / 2));
-}
-
-float Player::getHealth()
-{
-	return health;
 }

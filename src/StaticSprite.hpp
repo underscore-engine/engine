@@ -2,6 +2,7 @@
 #define StaticSprite_H
 
 #include "Hitbox.hpp"
+#include "Sprite.hpp"
 
 /**
  * A class for objects such as obsticles and platforms that will
@@ -9,16 +10,13 @@
  * be interacted with using its hitbox.
  *
  * @param texture_name The path to the image for the sprite texture
- * @param _pos The initial position for the top left of the sprite
+ * @param pos The initial position for the top left of the sprite
+ * @param target_size The size that the platform should be
  */
-class StaticSprite : public Hitbox
+class StaticSprite : public Hitbox, public Sprite
 {
-private:
-	sf::Texture texture;
-
 public:
-	sf::Sprite sprite;
-	StaticSprite(std::string texture_name, sf::Vector2f _pos);
+	StaticSprite(std::string texture_name, sf::Vector2f pos, sf::Vector2f target_size);
 };
 
 #endif

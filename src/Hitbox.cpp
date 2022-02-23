@@ -23,7 +23,7 @@ Direction CollisionFix::h2_direction()
 	return getDirectionFromVector(h2_displacement);
 }
 
-Hitbox::Hitbox(sf::Vector2f _pos, sf::Vector2f _size = sf::Vector2f(0, 0)) :
+Hitbox::Hitbox(sf::Vector2f _pos, sf::Vector2f _size) :
 	Physics { _pos }
 {
 	size = _size;
